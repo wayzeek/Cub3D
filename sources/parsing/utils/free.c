@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 11:02:25 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 11:35:22 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:00:54 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,6 @@ void	free_textures(t_parsing *parsing)
 	free(parsing->path_texture_north);
 	free(parsing->path_texture_south);
 	free(parsing->path_texture_west);
-}
-
-void	free_parsing(t_parsing *parsing)
-{
-	free_textures(parsing);
-	free_tab(parsing->map);
-	free(parsing);
 }
 
 char	**complete_map(char	**map)

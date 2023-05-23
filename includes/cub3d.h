@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 13:05:30 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:18:45 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ typedef struct s_ray
 	t_vector	sidedist;
 	t_point		hit;
 	double		angle;
-	int 		sq_lenght;
+	int			sq_lenght;
 }	t_ray;
 
 // Player structure
@@ -140,11 +140,11 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win;
 	t_img		img;
-	t_parsing	*parsing;
+	t_parsing	parsing;
 	int			tile_size;
-	t_player	*player;
+	t_player	player;
 	double		angle_master;
-	t_ray		**ray_tab;
+	t_ray		ray_tab[WIN_WIDTH];
 	int			max_ray_lenght;
 }	t_data;
 
@@ -154,7 +154,7 @@ int			main(int argc, char **argv);
 
 // parsing.c
 
-int			get_parsing(t_parsing	*parsing, char	*map_name);
+int			get_parsing(t_data	*data, char	*map_name);
 
 // fill_parsing.c
 
@@ -210,17 +210,16 @@ int			check_line_directions(char	*line);
 
 void		free_tab(char **tab);
 char		**complete_map(char	**map);
-void		free_parsing(t_parsing *parsing);
 void		free_textures(t_parsing *parsing);
 int			check_each_line(char	*line, int i, int size, int position);
 
 // init.c
 
-int			init_all(t_data *data, t_parsing *parsing);
+int			init_all(t_data *data);
 
 // print.c
 
-void		print_img(t_data *data, t_parsing *parsing);
+void		print_img(t_data *data);
 
 // draw.c
 

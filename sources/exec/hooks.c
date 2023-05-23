@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 13:04:33 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:13:10 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ static void	free_and_exit(t_data *data)
 	mlx_destroy_image(data->mlx_ptr, data->img.img);
 	mlx_destroy_window(data->mlx_ptr, data->win);
 	mlx_destroy_display(data->mlx_ptr);
-	free_parsing(data->parsing);
+	free(data->mlx_ptr);
+	data->mlx_ptr = NULL;
+	free_textures(&data->parsing);
+	free_tab(data->parsing.map);
 	exit(0);
 }
 
@@ -41,6 +44,6 @@ int	key_hook(int keycode, t_data *data)
 	// 	hook_a(data);
 	// else if (keycode == D)
 	// 	hook_d(data);
-	print_img(data, data->parsing);
+	print_img(data);
 	return (1);
 }
