@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 14:13:10 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 15:03:42 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,41 @@ int	hook(void *mlx)
 int	key_hook(int keycode, t_data *data)
 {
 	(void)data;
+	printf("Player : %d %d\n", data->player.pos.x, data->player.pos.y);
 	if (keycode == ESQ)
 		free_and_exit(data);
-	// else if (keycode == UP || keycode == DOWN)
-	// 	hook_up_down(data, keycode);
-	// else if (keycode == LEFT || keycode == RIGHT)
-	// 	hook_left_right(data, keycode);
-	// else if (keycode == A)
-	// 	hook_a(data);
-	// else if (keycode == D)
-	// 	hook_d(data);
+	else if (keycode == UP)
+	{
+		data->player.pos.x += data->player.dir.x * SPEED;
+		data->player.pos.y += data->player.dir.y * SPEED;
+	}
+	else if (keycode == DOWN)
+	{
+		data->player.pos.x -= data->player.dir.x * SPEED;
+		data->player.pos.y -= data->player.dir.y * SPEED;
+	}
+	else if (keycode == LEFT)
+	{
+		printf("LEFT\n");
+		data->player.pos.x -= 10;
+	}
+	else if (keycode == RIGHT)
+	{
+		printf("RIGHT\n");
+		data->player.pos.x += 10;
+	}
+	else if (keycode == A)
+	{
+		data->angle_master -= 0.1;
+		data->player.dir.x = cos(data->angle_master);
+		data->player.dir.y = sin(data->angle_master);
+	}
+	else if (keycode == D)
+	{
+		data->angle_master += 0.1;
+		data->player.dir.x = cos(data->angle_master);
+		data->player.dir.y = sin(data->angle_master);
+	}
 	print_img(data);
 	return (1);
 }
