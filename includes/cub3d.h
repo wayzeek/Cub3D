@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 11:34:30 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 13:05:30 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,5 +213,23 @@ char		**complete_map(char	**map);
 void		free_parsing(t_parsing *parsing);
 void		free_textures(t_parsing *parsing);
 int			check_each_line(char	*line, int i, int size, int position);
+
+// init.c
+
+int			init_all(t_data *data, t_parsing *parsing);
+
+// print.c
+
+void		print_img(t_data *data, t_parsing *parsing);
+
+// draw.c
+
+void		put_tile(t_data *data, int x, int y, int color);
+void		print_square(t_data *data, int x, int y, int size);
+
+// hooks.c
+
+int			key_hook(int keycode, t_data *data);
+int			hook(void *mlx);
 
 #endif

@@ -6,7 +6,7 @@
 #    By: vcart <vcart@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 08:32:06 by vcart             #+#    #+#              #
-#    Updated: 2023/05/23 11:30:24 by vcart            ###   ########.fr        #
+#    Updated: 2023/05/23 13:06:15 by vcart            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,6 +52,10 @@ PARSING_FILES	=	${DIR_PARSING}parsing.c \
 
 # Exec files
 EXEC_FILES		=	${DIR_SRCS}main.c	\
+					${DIR_EXEC}init.c	\
+					${DIR_EXEC}print.c	\
+					${DIR_EXEC}draw.c	\
+					${DIR_EXEC}hooks.c	\
 					
 
 # Sources and headers
