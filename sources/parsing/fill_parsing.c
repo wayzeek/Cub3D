@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 23:12:55 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 11:35:26 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 12:35:54 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ int	create_trgb(int t, int r, int g, int b)
 {
 	return (t << 24 | r << 16 | g << 8 | b);
 }
+
 int	get_map(t_parsing *parsing, int map_fd, int map_size)
 {
 	char	*line;
