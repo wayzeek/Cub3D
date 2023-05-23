@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:42:15 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 15:08:04 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 20:32:00 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,19 +23,14 @@ static void	create_map_img(t_data *data, t_parsing *parsing)
 		x = 0;
 		while (parsing->map[y][x])
 		{
-			if (parsing->map[y][x] == '0')
-				put_tile(data, x, y, 0xFFF7D4);
-			else if (parsing->map[y][x] == '1')
+			if (parsing->map[y][x] == '1')
 				put_tile(data, x, y, 0xC07F00);
 			else if (ft_contains(" /t/n/r/v/f", parsing->map[y][x]))
 				put_tile(data, x, y, 0x4C3D3D);
-			else 
-			{
-				printf("\n\nPRINTING PLAYER\n\n");
+			else
 				put_tile(data, x, y, 0xFFF7D4);
-				print_square(data, data->player.pos.x, \
-				data->player.pos.y, data->tile_size / 4);
-			}
+			print_square(data, data->player.pos.x, \
+			data->player.pos.y, data->tile_size / 4);
 			x++;
 		}
 	}

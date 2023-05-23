@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 15:03:42 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 20:42:54 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,41 +31,43 @@ int	hook(void *mlx)
 	exit (0);
 }
 
-int	key_hook(int keycode, t_data *data)
+static void	handle_move(t_data *data, int keycode)
 {
-	(void)data;
-	printf("Player : %d %d\n", data->player.pos.x, data->player.pos.y);
-	if (keycode == ESQ)
-		free_and_exit(data);
-	else if (keycode == UP)
+	if (keycode == W)
 	{
 		data->player.pos.x += data->player.dir.x * SPEED;
 		data->player.pos.y += data->player.dir.y * SPEED;
 	}
-	else if (keycode == DOWN)
+	else if (keycode == S)
 	{
 		data->player.pos.x -= data->player.dir.x * SPEED;
 		data->player.pos.y -= data->player.dir.y * SPEED;
 	}
-	else if (keycode == LEFT)
-	{
-		printf("LEFT\n");
-		data->player.pos.x -= 10;
-	}
-	else if (keycode == RIGHT)
-	{
-		printf("RIGHT\n");
-		data->player.pos.x += 10;
-	}
 	else if (keycode == A)
 	{
-		data->angle_master -= 0.1;
-		data->player.dir.x = cos(data->angle_master);
-		data->player.dir.y = sin(data->angle_master);
+		data->player.pos.x += data->player.dir.y * SPEED;
+		data->player.pos.y -= data->player.dir.x * SPEED;
 	}
 	else if (keycode == D)
 	{
-		data->angle_master += 0.1;
+		data->player.pos.x -= data->player.dir.y * SPEED;
+		data->player.pos.y += data->player.dir.x * SPEED;
+	}
+}
+
+int	key_hook(int keycode, t_data *data)
+{
+	(void)data;
+	if (keycode == ESQ)
+		free_and_exit(data);
+	if (keycode == W || keycode == S || keycode == A || keycode == D)
+		handle_move(data, keycode);
+	else if (keycode == LEFT || keycode == RIGHT)
+	{
+		if (keycode == LEFT)
+			data->angle_master -= 0.1;
+		else
+			data->angle_master += 0.1;
 		data->player.dir.x = cos(data->angle_master);
 		data->player.dir.y = sin(data->angle_master);
 	}
