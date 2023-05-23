@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:29:33 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 11:35:35 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:03:37 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	check_parsing_error(char *map_name, int map_size, int mode)
 	return (0);
 }
 
-int	get_parsing(t_parsing	*parsing, char	*map_name)
+int	get_parsing(t_data	*data, char	*map_name)
 {
 	int			map_size;
 	int			map_fd;
@@ -86,10 +86,10 @@ int	get_parsing(t_parsing	*parsing, char	*map_name)
 	map_fd = open(map_name, O_RDONLY);
 	if (map_fd == -1)
 		return (-1);
-	if (exec_mode(parsing, map_fd, mode) == -1)
+	if (exec_mode(&data->parsing, map_fd, mode) == -1)
 		return (-1);
-	if (get_map(parsing, map_fd, map_size) == -1)
-		return (free_textures(parsing), free(parsing), -1);
+	if (get_map(&data->parsing, map_fd, map_size) == -1)
+		return (free_textures(&data->parsing), -1);
 	close(map_fd);
 	return (0);
 }

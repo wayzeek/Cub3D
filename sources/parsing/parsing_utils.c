@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 13:15:28 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 11:35:31 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/23 14:05:12 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,16 @@ int	exec_mode(t_parsing *parsing, int map_fd, int mode)
 	if (mode == 1)
 	{
 		if (get_textures(parsing, map_fd) == -1)
-			return (free(parsing), -1);
+			return (-1);
 		if (get_colors(parsing, map_fd) == -1)
-			return (free_textures(parsing), free(parsing), -1);
+			return (free_textures(parsing), -1);
 	}
 	if (mode == 2)
 	{
 		if (get_colors(parsing, map_fd) == -1)
-			return (free(parsing), -1);
+			return (-1);
 		if (get_textures(parsing, map_fd) == -1)
-			return (free(parsing), -1);
+			return (-1);
 	}
 	return (0);
 }
