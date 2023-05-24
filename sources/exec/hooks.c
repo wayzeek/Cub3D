@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 20:42:54 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/24 11:12:14 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,35 @@ static void	handle_move(t_data *data, int keycode)
 {
 	if (keycode == W)
 	{
-		data->player.pos.x += data->player.dir.x * SPEED;
-		data->player.pos.y += data->player.dir.y * SPEED;
+		if (data->parsing.map[(int)(data->player.pos.y + data->player.dir.y * SPEED) / data->tile_size][(int)(data->player.pos.x + data->player.dir.x * SPEED) / data->tile_size] != '1')
+		{
+			data->player.pos.x += data->player.dir.x * SPEED;
+			data->player.pos.y += data->player.dir.y * SPEED;
+		}
 	}
 	else if (keycode == S)
 	{
-		data->player.pos.x -= data->player.dir.x * SPEED;
-		data->player.pos.y -= data->player.dir.y * SPEED;
+		if (data->parsing.map[(int)(data->player.pos.y - data->player.dir.y * SPEED) / data->tile_size][(int)(data->player.pos.x - data->player.dir.x * SPEED) / data->tile_size] != '1')
+		{
+			data->player.pos.x -= data->player.dir.x * SPEED;
+			data->player.pos.y -= data->player.dir.y * SPEED;
+		}
 	}
 	else if (keycode == A)
 	{
-		data->player.pos.x += data->player.dir.y * SPEED;
-		data->player.pos.y -= data->player.dir.x * SPEED;
+		if (data->parsing.map[(int)(data->player.pos.y - data->player.dir.x * SPEED) / data->tile_size][(int)(data->player.pos.x + data->player.dir.y * SPEED) / data->tile_size] != '1')
+		{
+			data->player.pos.x += data->player.dir.y * SPEED;
+			data->player.pos.y -= data->player.dir.x * SPEED;
+		}
 	}
 	else if (keycode == D)
 	{
-		data->player.pos.x -= data->player.dir.y * SPEED;
-		data->player.pos.y += data->player.dir.x * SPEED;
+		if (data->parsing.map[(int)(data->player.pos.y + data->player.dir.x * SPEED) / data->tile_size][(int)(data->player.pos.x - data->player.dir.y * SPEED) / data->tile_size] != '1')
+		{
+			data->player.pos.x -= data->player.dir.y * SPEED;
+			data->player.pos.y += data->player.dir.x * SPEED;
+		}
 	}
 }
 
