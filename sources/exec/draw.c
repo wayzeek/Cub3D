@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 13:02:06 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/24 12:51:24 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	put_tile(t_data *data, int x, int y, int color)
 	while (i <= x * data->tile_size + data->tile_size)
 	{
 		j = y * data->tile_size;
-		while (j <= y * data->tile_size + data->tile_size)
+		while (j < y * data->tile_size + data->tile_size)
 		{
 			mlx_pixel_put_img(&data->img, i, j, color);
 			j++;
