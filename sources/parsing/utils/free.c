@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 11:02:25 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/24 11:42:18 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/24 14:15:54 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,15 +73,15 @@ int	check_each_line(char	*line, int i, int size, int position)
 
 int	check_player(t_data *data)
 {
-	int	i;
-	int	j;
-	char **map;
-	int	player;
+	int		i;
+	int		j;
+	char	**map;
+	int		player;
 
-	i = 0;
+	i = -1;
 	player = 0;
 	map = data->parsing.map;
-	while (map[i])
+	while (map[++i])
 	{
 		j = 0;
 		while (map[i][j])
@@ -90,7 +90,6 @@ int	check_player(t_data *data)
 				player++;
 			j++;
 		}
-		i++;
 	}
 	if (player != 1)
 	{

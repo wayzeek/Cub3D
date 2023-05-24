@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/24 11:42:47 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/24 14:34:16 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@
 # define WIN_HEIGHT 1000
 # define PI 3.14159265358979323846
 # define FOV 60
-# define SPEED 5
+# define SPEED 10
 # define CEILLING 0xB0C4DE
 
 // Headers
