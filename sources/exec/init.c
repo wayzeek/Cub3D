@@ -59,6 +59,14 @@ static void	get_player_position(char **map, t_data *data)
 	}
 }
 
+/*
+ * distribute the direction of each ray to create the field of view
+ */
+void	init_angle(t_data *data, double *angle, double i)
+{
+	*angle = data->angle_master + (i / WIN_WIDTH * FOV) * (PI / 180);
+}
+
 int	init_all(t_data *data)
 {
 	data->mlx_ptr = mlx_init();
