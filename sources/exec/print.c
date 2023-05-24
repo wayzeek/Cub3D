@@ -39,6 +39,6 @@ static void	create_map_img(t_data *data, t_parsing *parsing)
 void	print_img(t_data *data)
 {
 	create_map_img(data, &data->parsing);
-	//raycasting(data);
+	raycasting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win, data->img.img, 0, 0);
 }

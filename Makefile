@@ -56,7 +56,9 @@ EXEC_FILES		=	${DIR_SRCS}main.c	\
 					${DIR_EXEC}print.c	\
 					${DIR_EXEC}draw.c	\
 					${DIR_EXEC}hooks.c	\
-					
+					${DIR_EXEC}raycasting.c	\
+					${DIR_EXEC}utils.c	\
+
 
 # Sources and headers
 SRCS_FILES			=	${PARSING_FILES} \

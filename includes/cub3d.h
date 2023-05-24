@@ -217,6 +217,7 @@ int			check_each_line(char	*line, int i, int size, int position);
 // init.c
 
 int			init_all(t_data *data);
+void		init_angle(t_data *data, double *angle, double i);
 
 // print.c
 
@@ -226,10 +227,20 @@ void		print_img(t_data *data);
 
 void		put_tile(t_data *data, int x, int y, int color);
 void		print_square(t_data *data, int x, int y, int size);
+void		draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color);
+void		draw_vert_ray(t_data *data, t_ray *ray);
 
 // hooks.c
 
 int			key_hook(int keycode, t_data *data);
 int			hook(void *mlx);
+
+// raycasting.c
+
+void		raycasting(t_data *data);
+
+// utils.c
+
+int			get_seg_length_squared(t_vector vec1, t_vector vec2);
 
 #endif
