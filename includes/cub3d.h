@@ -24,7 +24,7 @@
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 1000
 # define PI 3.14159265358979323846
-# define FOV 60
+# define FOV 90
 # define SPEED 10
 # define CEILLING 0xB0C4DE
 
@@ -217,7 +217,7 @@ int			check_each_line(char	*line, int i, int size, int position);
 // init.c
 
 int			init_all(t_data *data);
-void		init_angle(t_data *data, double *angle, double i);
+void		init_angle(t_data *data, double *angle, int i);
 
 // print.c
 
