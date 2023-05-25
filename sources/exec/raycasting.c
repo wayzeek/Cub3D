@@ -55,7 +55,7 @@ static void	dda(t_data *data, t_ray *ray)
 	int		hit;
 
 	hit = FALSE;
-	while (!hit && ray->map.x <= WIN_WIDTH && ray->map.y <= WIN_HEIGHT) // needs to be secured to infinite
+	while (!hit && ray->map.x <= WIN_WIDTH && ray->map.y <= WIN_HEIGHT)
 	{
 		if (ray->sidedist.x < ray->sidedist.y)
 		{
@@ -70,7 +70,7 @@ static void	dda(t_data *data, t_ray *ray)
 		cell = (t_point) {ray->map.x / data->tile_size, ray->map.y / data->tile_size};
 		if (data->parsing.map[cell.y][cell.x] == '1')
 			hit = TRUE;
-		ray->sq_lenght = get_seg_length_squared(ray->start, ray->map);
+		ray->sq_lenght = get_seg_length_squared(ray->start, ray->map); // * cos(ray->angle);
 	}
 	ray->hit = (t_point){ray->map.x, ray->map.y};
 }
@@ -86,6 +86,8 @@ void	raycasting(t_data *data)
 		init_dda(data, &data->ray_tab[i], i);
 		dda(data, &data->ray_tab[i]);
 		draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){data->ray_tab[i].map.x, data->ray_tab[i].map.y}, 0xc4b4b3);
-		//draw_vert_ray(data, &data->ray_tab[i]);
+//		draw_vert_ray(data, &data->ray_tab[i]);
+//        if (i % 100 == 0)
+//            printf("ray %i: %i\n", i, data->ray_tab[i].sq_lenght);
 	}
 }
