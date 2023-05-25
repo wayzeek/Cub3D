@@ -7,9 +7,9 @@ WE ./path_to_the_west_texture
 EA ./path_to_the_east_texture
 NO ./path_to_the_north_texture
 
-
-1111111111
-1010110001
-1000000001
-10100010E1
-1111111111
+111111
+100001
+100001
+100001
+100N01
+111111

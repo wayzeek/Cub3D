@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 11:02:25 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 14:00:54 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/24 14:15:54 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,5 +68,34 @@ int	check_each_line(char	*line, int i, int size, int position)
 		printf("Error\nMultiple spawn points!\n"), -1);
 	free(line);
 	free(new_line);
+	return (0);
+}
+
+int	check_player(t_data *data)
+{
+	int		i;
+	int		j;
+	char	**map;
+	int		player;
+
+	i = -1;
+	player = 0;
+	map = data->parsing.map;
+	while (map[++i])
+	{
+		j = 0;
+		while (map[i][j])
+		{
+			if (ft_contains("NSEW", map[i][j]))
+				player++;
+			j++;
+		}
+	}
+	if (player != 1)
+	{
+		free_tab(map);
+		printf("Error\nNo spawn point or multiple spawn points!\n");
+		return (1);
+	}
 	return (0);
 }

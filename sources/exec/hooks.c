@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 20:42:54 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/24 13:24:22 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,8 +31,34 @@ int	hook(void *mlx)
 	exit (0);
 }
 
+static int	check_possible_move(t_data *data, int keycode)
+{
+	if (keycode == W && (data->parsing.map[(int)(data->player.pos.y \
+	+ data->player.dir.y * SPEED) / data->tile_size] \
+	[(int)(data->player.pos.x + data->player.dir.x \
+	* SPEED) / data->tile_size] != '1'))
+		return (1);
+	else if (keycode == S && (data->parsing.map[(int)(data->player.pos.y \
+	+ data->tile_size / 4 - data->player.dir.y * SPEED) / data->tile_size] \
+	[(int)(data->player.pos.x - data->player.dir.x * SPEED) \
+	/ data->tile_size] != '1'))
+		return (1);
+	else if (keycode == A && (data->parsing.map[(int)(data->player.pos.y - \
+	data->player.dir.x * SPEED) / data->tile_size][(int)(data->player.pos.x \
+	+ data->player.dir.y * SPEED) / data->tile_size] != '1'))
+		return (1);
+	else if (keycode == D && (data->parsing.map[(int)(data->player.pos.y + \
+	data->player.dir.x * SPEED) / data->tile_size][(int)(data->player.pos.x + \
+	data->tile_size / 4 - data->player.dir.y * SPEED) / data->tile_size] != \
+	'1'))
+		return (1);
+	return (0);
+}
+
 static void	handle_move(t_data *data, int keycode)
 {
+	if (!check_possible_move(data, keycode))
+		return ;
 	if (keycode == W)
 	{
 		data->player.pos.x += data->player.dir.x * SPEED;

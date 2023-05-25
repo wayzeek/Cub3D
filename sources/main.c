@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:25:53 by jprofit           #+#    #+#             */
-/*   Updated: 2023/05/23 14:17:44 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/24 11:45:40 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ int	main(int argc, char **argv)
 
 	if (get_parsing(&data, argv[1]) == -1)
 		return (1);
+	if (check_player(&data))
+		return (free_textures(&data.parsing), 1);
 	printf("Map is valid !\n\n");
 	init_all(&data);
 	data.win = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cub3D");

@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 15:03:25 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/24 14:34:16 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -213,6 +213,7 @@ void		free_tab(char **tab);
 char		**complete_map(char	**map);
 void		free_textures(t_parsing *parsing);
 int			check_each_line(char	*line, int i, int size, int position);
+int			check_player(t_data *data);
 
 // init.c
 
