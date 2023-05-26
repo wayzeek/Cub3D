@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:42:15 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/26 10:31:34 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/26 11:42:13 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ static void	create_map_img(t_data *data, t_parsing *parsing)
 				put_tile(data, x, y, 0x4C3D3D);
 			else
 				put_tile(data, x, y, 0xFFF7D4);
-			//print_square(data, data->player.pos.x, \
+			print_square(data, data->player.pos.x, \
 			data->player.pos.y, data->tile_size / 4);
 			x++;
 		}
@@ -38,7 +38,7 @@ static void	create_map_img(t_data *data, t_parsing *parsing)
 
 void	print_img(t_data *data)
 {
-	//create_map_img(data, &data->parsing);
+	create_map_img(data, &data->parsing);
 	raycasting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win, data->img.img, 0, 0);
 	mlx_put_image_to_window(data->mlx_ptr, data->win, data->img_minimap.img, 0, 0);
