@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/24 13:24:22 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/26 10:42:32 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 static void	free_and_exit(t_data *data)
 {
 	mlx_destroy_image(data->mlx_ptr, data->img.img);
+	mlx_destroy_image(data->mlx_ptr, data->img_minimap.img);
 	mlx_destroy_window(data->mlx_ptr, data->win);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
@@ -39,7 +40,7 @@ static int	check_possible_move(t_data *data, int keycode)
 	* SPEED) / data->tile_size] != '1'))
 		return (1);
 	else if (keycode == S && (data->parsing.map[(int)(data->player.pos.y \
-	+ data->tile_size / 4 - data->player.dir.y * SPEED) / data->tile_size] \
+	- data->player.dir.y * SPEED) / data->tile_size] \
 	[(int)(data->player.pos.x - data->player.dir.x * SPEED) \
 	/ data->tile_size] != '1'))
 		return (1);
@@ -48,8 +49,8 @@ static int	check_possible_move(t_data *data, int keycode)
 	+ data->player.dir.y * SPEED) / data->tile_size] != '1'))
 		return (1);
 	else if (keycode == D && (data->parsing.map[(int)(data->player.pos.y + \
-	data->player.dir.x * SPEED) / data->tile_size][(int)(data->player.pos.x + \
-	data->tile_size / 4 - data->player.dir.y * SPEED) / data->tile_size] != \
+	data->player.dir.x * SPEED) / data->tile_size][(int)(data->player.pos.x \
+	- data->player.dir.y * SPEED) / data->tile_size] != \
 	'1'))
 		return (1);
 	return (0);
@@ -79,6 +80,7 @@ static void	handle_move(t_data *data, int keycode)
 		data->player.pos.x -= data->player.dir.y * SPEED;
 		data->player.pos.y += data->player.dir.x * SPEED;
 	}
+	print_img(data);
 }
 
 int	key_hook(int keycode, t_data *data)
@@ -96,7 +98,7 @@ int	key_hook(int keycode, t_data *data)
 			data->angle_master += 0.1;
 		data->player.dir.x = cos(data->angle_master);
 		data->player.dir.y = sin(data->angle_master);
+		print_img(data);
 	}
-	print_img(data);
 	return (1);
 }

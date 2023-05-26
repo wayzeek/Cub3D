@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:39:32 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/24 13:12:13 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/26 09:28:52 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 static int	get_tile_size(t_parsing parsing)
 {
 	if (WIN_HEIGHT >= WIN_WIDTH)
-		return (WIN_WIDTH / get_len_longest_line(parsing.map));
+		return (WIN_WIDTH / 4 / get_len_longest_line(parsing.map));
 	else
-		return (WIN_HEIGHT / get_len_longest_line(parsing.map));
+		return (WIN_HEIGHT / 4 /get_len_longest_line(parsing.map));
 }
 
 // Sets in radian the player's starting direction
