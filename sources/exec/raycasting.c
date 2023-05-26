@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:49:20 by jprofit           #+#    #+#             */
-/*   Updated: 2023/05/26 09:16:50 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/26 14:25:44 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,9 +95,7 @@ void	raycasting(t_data *data)
 		init_angle(data, i);
 		init_dda(data, &data->ray_tab[i], i);
 		dda(data, &data->ray_tab[i]);
-		draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){data->ray_tab[i].map.x, data->ray_tab[i].map.y}, 0xc4b4b3);
+		//draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){data->ray_tab[i].map.x, data->ray_tab[i].map.y}, 0xc4b4b3);
 		draw_vert_ray(data, &data->ray_tab[i]);
-//        if (i % 100 == 0)
-//            printf("ray %i: %i\n", i, data->ray_tab[i].sq_lenght);
 	}
 }
