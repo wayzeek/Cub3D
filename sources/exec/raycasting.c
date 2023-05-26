@@ -15,14 +15,16 @@
 /*
  * initalize values and sets some of them to ensure working algorithm in
  * all 4 directions
+ * ray->dir is normalized (just by not adding the current x and y)
  */
 static void	init_dda(t_data *data, t_ray *ray, int i)
 {
 	ray->id = i;
 	ray->start = (t_vector){data->player.pos.x, data->player.pos.y};
 	ray->map = ray->start;
-	ray->dir = (t_vector){ray->start.x * cos(ray->angle), ray->start.y * sin(ray->angle)};
-	ray->deltadist = (t_vector){fabs(1 / ray->dir.x), fabs(1 / ray->dir.y)};
+	ray->dir = (t_vector){cos(ray->angle), sin(ray->angle)};
+	ray->deltadist = (t_vector){fabs(1.0 / ray->dir.x), fabs(1.0 / ray->dir.y)};
+
 	if (ray->dir.x < 0)
 	{
 		ray->step.x = -1;
@@ -75,6 +77,14 @@ static void	dda(t_data *data, t_ray *ray)
 	ray->hit = (t_point){ray->map.x, ray->map.y};
 }
 
+void static show_angle(t_data *data, t_ray ray)
+{
+	if ((ray.id >= 10 && ray.id <= 12) || (ray.id >= WIN_WIDTH - 12 && ray.id <= WIN_WIDTH - 10))
+		draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){ray.map.x, ray.map.y}, 0x721d80);
+	if (ray.id >= WIN_WIDTH / 2 - 1 && ray.id <= WIN_WIDTH / 2 + 1)
+		draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){ray.map.x, ray.map.y}, 0x3b0f42);
+}
+
 void	raycasting(t_data *data)
 {
 	int	i;
@@ -82,12 +92,11 @@ void	raycasting(t_data *data)
 	i = -1;
 	while (++i < WIN_WIDTH)
 	{
-		init_angle(data, &data->ray_tab[i].angle, i);
+		init_angle(data, i);
 		init_dda(data, &data->ray_tab[i], i);
 		dda(data, &data->ray_tab[i]);
-		draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){data->ray_tab[i].map.x, data->ray_tab[i].map.y}, 0xc4b4b3);
-//		draw_vert_ray(data, &data->ray_tab[i]);
-//        if (i % 100 == 0)
-//            printf("ray %i: %i\n", i, data->ray_tab[i].sq_lenght);
+		draw_vert_ray(data, &data->ray_tab[i]);
+//		draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){data->ray_tab[i].map.x, data->ray_tab[i].map.y}, 0xc4b4b3);
+//		show_angle(data, data->ray_tab[i]);
 	}
 }
