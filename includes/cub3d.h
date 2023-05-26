@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/24 14:34:16 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/26 09:10:49 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,8 @@ typedef struct s_data
 	void		*mlx_ptr;
 	void		*win;
 	t_img		img;
+	t_img		img_minimap;
+	
 	t_parsing	parsing;
 	int			tile_size;
 	t_player	player;

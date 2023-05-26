@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:25:53 by jprofit           #+#    #+#             */
-/*   Updated: 2023/05/24 11:45:40 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/26 09:20:00 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,9 @@ int	main(int argc, char **argv)
 	data.img.img = mlx_new_image(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
 	data.img.addr = mlx_get_data_addr(data.img.img, &data.img.bits_per_pixel, \
 	&data.img.line_length, &data.img.endian);
+	data.img_minimap.img = mlx_new_image(data.mlx_ptr, WIN_WIDTH / 4, WIN_HEIGHT / 4);
+	data.img_minimap.addr = mlx_get_data_addr(data.img_minimap.img, &data.img_minimap.bits_per_pixel, \
+	&data.img_minimap.line_length, &data.img_minimap.endian);
 	print_img(&data);
 	mlx_hook(data.win, 2, 1L<<0, key_hook, &data);
 	mlx_hook(data.win, 17, 0, hook, &data);

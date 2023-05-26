@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/24 12:51:24 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/26 09:14:52 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	put_tile(t_data *data, int x, int y, int color)
 		j = y * data->tile_size;
 		while (j < y * data->tile_size + data->tile_size)
 		{
-			mlx_pixel_put_img(&data->img, i, j, color);
+			mlx_pixel_put_img(&data->img_minimap, i, j, color);
 			j++;
 		}
 		i++;
@@ -51,7 +51,7 @@ void	print_square(t_data *data, int x, int y, int size)
 		j = y;
 		while (j <= y + size)
 		{
-			mlx_pixel_put_img(&data->img, i, j, 0x2133bf);
+			mlx_pixel_put_img(&data->img_minimap, i, j, 0x2133bf);
 			j++;
 		}
 		i++;
@@ -86,13 +86,39 @@ void draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color)
 	i = -1;
 	while (++i <= steps)
 	{
+		if (vec1.x >= 0 && vec1.x <= WIN_WIDTH / 4 && vec1.y >= 0 && vec1.y <= WIN_HEIGHT / 4)
+			mlx_pixel_put_img(&data->img_minimap, vec1.x, vec1.y, color);
+		vec1.x += increment.x;
+		vec1.y += increment.y;
+	}
+}
+
+void draw_seg(t_data *data, t_vector vec1, t_vector vec2, int color)
+{
+	t_point		delta;
+	t_vector	increment;
+	int			steps;
+	int			i;
+
+	delta.x = vec2.x - vec1.x;
+	delta.y = vec2.y - vec1.y;
+
+	if (abs(delta.x) > abs(delta.y))
+		steps = abs(delta.x);
+	else
+		steps = abs(delta.y);
+	increment.x = delta.x / (float)steps;
+	increment.y = delta.y / (float)steps;
+
+	i = -1;
+	while (++i <= steps)
+	{
 		if (vec1.x >= 0 && vec1.x <= WIN_WIDTH && vec1.y >= 0 && vec1.y <= WIN_HEIGHT)
 			mlx_pixel_put_img(&data->img, vec1.x, vec1.y, color);
 		vec1.x += increment.x;
 		vec1.y += increment.y;
 	}
 }
-
 /*
  * draw for each ray the sky, the wall then the floor
  * calculate the height of the wall based on the lenght of the ray
@@ -104,7 +130,7 @@ void	draw_vert_ray(t_data *data, t_ray *ray)
 
 	id = ray->id;
 	length = 1.0 / ray->sq_lenght * (WIN_WIDTH * WIN_WIDTH);
-	draw_segment(data, (t_vector){id, 0}, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, 0xb52424); //ceiling
-	draw_segment(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, (t_vector){id, WIN_HEIGHT / 2 + length / 2}, 0xeeff00); //wall
-	draw_segment(data, (t_vector){id, WIN_HEIGHT / 2 + length / 2}, (t_vector){id, WIN_HEIGHT}, 0x24b54f); // floor
+	draw_seg(data, (t_vector){id, 0}, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, 0xb52424); //ceiling
+	draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, (t_vector){id, WIN_HEIGHT / 2 + length / 2}, 0xeeff00); //wall
+	draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 + length / 2}, (t_vector){id, WIN_HEIGHT}, 0x24b54f); // floor
 }
