@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:39:32 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/26 13:11:28 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/30 13:22:26 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ static int	get_tile_size(t_parsing parsing)
 	if (WIN_HEIGHT >= WIN_WIDTH)
 		return (MAP_SIZE / get_len_longest_line(parsing.map));
 	else
-		return (MAP_SIZE /get_len_longest_line(parsing.map));
+		return (MAP_SIZE / get_len_longest_line(parsing.map));
 }
 
 // Sets in radian the player's starting direction
@@ -73,6 +73,8 @@ int	init_all(t_data *data)
 	data->tile_size = get_tile_size(data->parsing);
 	data->parsing.map_size_width = get_len_longest_line(data->parsing.map);
 	data->max_ray_lenght = 10 * data->tile_size;
+	data->minimap_length = data->tile_size * data->parsing.map_size_width;
+	data->minimap_height = data->tile_size * len_tab(data->parsing.map);
 	get_player_position(data->parsing.map, data);
 	set_ray_master(data);
 	return (SUCCESS);

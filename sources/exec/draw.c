@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/30 11:31:01 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/30 13:19:38 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,7 @@ void draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color)
 	i = -1;
 	while (++i <= steps)
 	{
-		if (vec1.x >= 0 && vec1.x <= MAP_SIZE && vec1.y >= 0 && vec1.y <= MAP_SIZE)
+		if (vec1.x >= 0 && vec1.x <= data->minimap_length && vec1.y >= 0 && vec1.y <= data->minimap_height)
 			mlx_pixel_put_img(&data->img_minimap, vec1.x, vec1.y, color);
 		vec1.x += increment.x;
 		vec1.y += increment.y;
@@ -142,7 +142,7 @@ void	floor_ceiling(t_data *data)
 	}
 }
 /*
- * draw for each ray the sky, the wall then the floor
+ * draw for each ray the wall
  * calculate the height of the wall based on the lenght of the ray
  */
 void	draw_vert_ray(t_data *data, t_ray *ray)
