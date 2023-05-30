@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/30 13:23:36 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/30 15:02:32 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -232,10 +232,16 @@ void		print_img(t_data *data);
 
 // draw.c
 
+void		mlx_pixel_put_img(t_img *img, int x, int y, int color);
 void		put_tile(t_data *data, int x, int y, int color);
 void		print_square(t_data *data, int x, int y, int size);
-void		draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color);
 void		draw_vert_ray(t_data *data, t_ray *ray);
+
+// draw_utils.c
+
+void		draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color);
+void		draw_seg(t_data *data, t_vector vec1, t_vector vec2, int color);
+void		floor_ceiling(t_data *data);
 
 // hooks.c
 
