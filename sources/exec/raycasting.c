@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:49:20 by jprofit           #+#    #+#             */
-/*   Updated: 2023/05/30 10:53:44 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/30 13:28:44 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ static void	dda(t_data *data, t_ray *ray)
 			ray->sidedist.y += ray->deltadist.y;
 			ray->map.y += ray->step.y;
 		}
-		cell = (t_point) {ray->map.x / data->tile_size, ray->map.y / data->tile_size};
+		cell = (t_point){ray->map.x / data->tile_size, ray->map.y / data->tile_size};
 		if (data->parsing.map[cell.y][cell.x] == '1')
 			hit = TRUE;
 		ray->sq_lenght = get_seg_length_squared(ray->start, ray->map); // * cos(ray->angle);
@@ -77,12 +77,12 @@ static void	dda(t_data *data, t_ray *ray)
 	ray->hit = (t_point){ray->map.x, ray->map.y};
 }
 
-void static show_angle(t_data *data, t_ray ray)
+static void	show_angle(t_data *data, t_ray ray)
 {
 	if ((ray.id >= 10 && ray.id <= 12) || (ray.id >= WIN_WIDTH - 12 && ray.id <= WIN_WIDTH - 10))
-		draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){ray.map.x, ray.map.y}, 0x721d80);
+		draw_segment(data, (t_vector){data->player.pos.x + data->tile_size / 8, data->player.pos.y + data->tile_size / 8}, (t_vector){ray.map.x, ray.map.y}, 0x721d80);
 	if (ray.id >= WIN_WIDTH / 2 - 1 && ray.id <= WIN_WIDTH / 2 + 1)
-		draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){ray.map.x, ray.map.y}, 0x3b0f42);
+		draw_segment(data, (t_vector){data->player.pos.x + data->tile_size / 8, data->player.pos.y + data->tile_size / 8}, (t_vector){ray.map.x, ray.map.y}, 0x3b0f42);
 }
 
 void	raycasting(t_data *data)
@@ -95,7 +95,7 @@ void	raycasting(t_data *data)
 		init_angle(data, i);
 		init_dda(data, &data->ray_tab[i], i);
 		dda(data, &data->ray_tab[i]);
-		//draw_segment(data, (t_vector){data->player.pos.x, data->player.pos.y}, (t_vector){data->ray_tab[i].map.x, data->ray_tab[i].map.y}, 0xc4b4b3);
+		show_angle(data, data->ray_tab[i]);
 		draw_vert_ray(data, &data->ray_tab[i]);
 	}
 }
