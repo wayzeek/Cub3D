@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/26 14:22:56 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/30 11:31:01 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,7 @@ void	print_square(t_data *data, int x, int y, int size)
  * then calculates the increment values for the x and y
  * for each step based on the distance and number of steps.
  */
+
 void draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color)
 {
 	t_point		delta;
@@ -151,5 +152,7 @@ void	draw_vert_ray(t_data *data, t_ray *ray)
 
 	id = ray->id;
 	length = 1.0 / ray->sq_lenght * (WIN_WIDTH * WIN_WIDTH);
+    if (length > 10000)
+    	length = WIN_HEIGHT; // Clamp the length to a maximum value
 	draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, (t_vector){id, WIN_HEIGHT / 2 + length / 2}, 0xeeff00); //wall
 }
