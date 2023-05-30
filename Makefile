@@ -6,7 +6,7 @@
 #    By: vcart <vcart@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 08:32:06 by vcart             #+#    #+#              #
-#    Updated: 2023/05/24 12:00:23 by vcart            ###   ########.fr        #
+#    Updated: 2023/05/30 13:38:49 by vcart            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -55,6 +55,7 @@ EXEC_FILES		=	${DIR_SRCS}main.c	\
 					${DIR_EXEC}init.c	\
 					${DIR_EXEC}print.c	\
 					${DIR_EXEC}draw.c	\
+					${DIR_EXEC}draw_utils.c	\
 					${DIR_EXEC}hooks.c	\
 					${DIR_EXEC}raycasting.c	\
 					${DIR_EXEC}utils.c	\
