@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/26 10:42:32 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/30 11:29:56 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,26 +34,35 @@ int	hook(void *mlx)
 
 static int	check_possible_move(t_data *data, int keycode)
 {
-	if (keycode == W && (data->parsing.map[(int)(data->player.pos.y \
-	+ data->player.dir.y * SPEED) / data->tile_size] \
-	[(int)(data->player.pos.x + data->player.dir.x \
-	* SPEED) / data->tile_size] != '1'))
-		return (1);
-	else if (keycode == S && (data->parsing.map[(int)(data->player.pos.y \
-	- data->player.dir.y * SPEED) / data->tile_size] \
-	[(int)(data->player.pos.x - data->player.dir.x * SPEED) \
-	/ data->tile_size] != '1'))
-		return (1);
-	else if (keycode == A && (data->parsing.map[(int)(data->player.pos.y - \
-	data->player.dir.x * SPEED) / data->tile_size][(int)(data->player.pos.x \
-	+ data->player.dir.y * SPEED) / data->tile_size] != '1'))
-		return (1);
-	else if (keycode == D && (data->parsing.map[(int)(data->player.pos.y + \
-	data->player.dir.x * SPEED) / data->tile_size][(int)(data->player.pos.x \
-	- data->player.dir.y * SPEED) / data->tile_size] != \
-	'1'))
-		return (1);
-	return (0);
+	t_point	next_pos;
+
+	if (keycode == W)
+	{
+		next_pos.x = data->player.pos.x + data->player.dir.x * SPEED;
+		next_pos.y = data->player.pos.y + data->player.dir.y * SPEED;
+	}
+	else if (keycode == S)
+	{
+		next_pos.x = data->player.pos.x - data->player.dir.x * SPEED;
+		next_pos.y = data->player.pos.y - data->player.dir.y * SPEED;
+	}
+	else if (keycode == A)
+	{
+		next_pos.x = data->player.pos.x + data->player.dir.y * SPEED;
+		next_pos.y = data->player.pos.y - data->player.dir.x * SPEED;
+	}
+	else if (keycode == D)
+	{
+		next_pos.x = data->player.pos.x - data->player.dir.y * SPEED;
+		next_pos.y = data->player.pos.y + data->player.dir.x * SPEED;
+	}
+	if (!data->parsing.map[next_pos.y / data->tile_size] || !data->parsing.map \
+	[next_pos.y / data->tile_size][next_pos.x / data->tile_size])
+		return (0);
+	if (data->parsing.map[next_pos.y / data->tile_size] \
+	[next_pos.x / data->tile_size] == '1')
+		return (0);
+	return (1);
 }
 
 static void	handle_move(t_data *data, int keycode)

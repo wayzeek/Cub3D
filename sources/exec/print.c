@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:42:15 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/26 11:42:13 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/30 10:33:03 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ static void	create_map_img(t_data *data, t_parsing *parsing)
 void	print_img(t_data *data)
 {
 	create_map_img(data, &data->parsing);
+	floor_ceiling(data);
 	raycasting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win, data->img.img, 0, 0);
 	mlx_put_image_to_window(data->mlx_ptr, data->win, data->img_minimap.img, 0, 0);

@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/26 09:10:49 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/30 11:10:07 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,10 @@
 # define WALL 1
 # define WIN_WIDTH 1000
 # define WIN_HEIGHT 1000
+# define MAP_SIZE (WIN_WIDTH / 4)
 # define PI 3.14159265358979323846
 # define FOV (PI / 2)
-# define SPEED 10
+# define SPEED 5
 # define CEILLING 0xB0C4DE
 
 // Headers
@@ -142,7 +143,7 @@ typedef struct s_data
 	void		*win;
 	t_img		img;
 	t_img		img_minimap;
-	
+
 	t_parsing	parsing;
 	int			tile_size;
 	t_player	player;

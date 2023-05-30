@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/26 09:14:52 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/30 11:31:01 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ static void	mlx_pixel_put_img(t_img *img, int x, int y, int color)
 	char	*dst;
 	int		offset;
 
+	if (img == NULL || img->addr == NULL)
+		return ;
 	offset = y * img->line_length + x * (img->bits_per_pixel / 8);
 	dst = img->addr + offset;
 	*(unsigned int *)dst = color;
@@ -66,6 +68,7 @@ void	print_square(t_data *data, int x, int y, int size)
  * then calculates the increment values for the x and y
  * for each step based on the distance and number of steps.
  */
+
 void draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color)
 {
 	t_point		delta;
@@ -86,7 +89,7 @@ void draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color)
 	i = -1;
 	while (++i <= steps)
 	{
-		if (vec1.x >= 0 && vec1.x <= WIN_WIDTH / 4 && vec1.y >= 0 && vec1.y <= WIN_HEIGHT / 4)
+		if (vec1.x >= 0 && vec1.x <= MAP_SIZE && vec1.y >= 0 && vec1.y <= MAP_SIZE)
 			mlx_pixel_put_img(&data->img_minimap, vec1.x, vec1.y, color);
 		vec1.x += increment.x;
 		vec1.y += increment.y;
@@ -119,6 +122,25 @@ void draw_seg(t_data *data, t_vector vec1, t_vector vec2, int color)
 		vec1.y += increment.y;
 	}
 }
+
+void	floor_ceiling(t_data *data)
+{
+	int	x;
+	int	y;
+
+	x = 0;
+	while (x < WIN_WIDTH)
+	{
+		y = 0;
+		while (y < WIN_HEIGHT / 2)
+		{
+			mlx_pixel_put_img(&data->img, x, y, data->parsing.color_ceiling);
+			mlx_pixel_put_img(&data->img, x, y + WIN_HEIGHT / 2, data->parsing.color_floor);
+			y++;
+		}
+		x++;
+	}
+}
 /*
  * draw for each ray the sky, the wall then the floor
  * calculate the height of the wall based on the lenght of the ray
@@ -130,7 +152,7 @@ void	draw_vert_ray(t_data *data, t_ray *ray)
 
 	id = ray->id;
 	length = 1.0 / ray->sq_lenght * (WIN_WIDTH * WIN_WIDTH);
-	draw_seg(data, (t_vector){id, 0}, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, 0xb52424); //ceiling
+    if (length > 10000)
+    	length = WIN_HEIGHT; // Clamp the length to a maximum value
 	draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, (t_vector){id, WIN_HEIGHT / 2 + length / 2}, 0xeeff00); //wall
-	draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 + length / 2}, (t_vector){id, WIN_HEIGHT}, 0x24b54f); // floor
 }
