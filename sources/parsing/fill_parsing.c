@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/29 23:12:55 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 14:00:12 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:34:01 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,7 @@ int	get_colors(t_parsing *parsing, int map_fd)
 			break ;
 		if (fill_colors(line, parsing) == -1)
 			return (-1);
+		free(line);
 		line = get_next_line(map_fd);
 		if (!line)
 			return (-1);

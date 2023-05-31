@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/02 13:15:28 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 14:05:12 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:32:29 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,25 +67,20 @@ int	fill_textures(char *line, t_parsing *parsing)
 
 int	fill_colors(char *line, t_parsing *parsing)
 {
-	char	**line_splitted;
-	char	**colors;
+	char	**color_splitted;
+	int		i;
 
-	line_splitted = ft_split(line, ' ');
-	if (!line_splitted)
+	color_splitted = ft_split(line, ',');
+	if (!color_splitted)
 		return (printf("Error\n"), -1);
-	colors = ft_split(line_splitted[1], ',');
-	if (!colors)
-		return (printf("Error\n"), -1);
-	if (ft_strcmp(line_splitted[0], "F") == 0)
-		parsing->color_floor = create_trgb(0, \
-		ft_atoi(colors[0]), ft_atoi(colors[1]), ft_atoi(colors[2]));
-	else if (ft_strcmp(line_splitted[0], "C") == 0)
-		parsing->color_ceiling = create_trgb(0, \
-		ft_atoi(colors[0]), ft_atoi(colors[1]), ft_atoi(colors[2]));
-	free(line);
-	free_tab(line_splitted);
-	free_tab(colors);
-	return (0);
+	i = 0;
+	while (color_splitted[i])
+	{
+		if (fill_each_color(parsing, color_splitted, i) == -1)
+			return (printf("Error\n"), -1);
+		i++;
+	}
+	return (free_tab(color_splitted), 1);
 }
 
 char	**fill_map(char	*line, int map_size, int map_fd)
