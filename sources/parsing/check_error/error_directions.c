@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:39:48 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 11:35:06 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/31 10:58:15 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	check_directions(int map_fd)
 	}
 	if (i != 4)
 		return (free(line), \
-		printf("Error\nNot enough directions parameters !\n"), -1);
+		printf("Error\nNot enough or too many directions parameters !\n"), -1);
 	return (free(line), 0);
 }
 

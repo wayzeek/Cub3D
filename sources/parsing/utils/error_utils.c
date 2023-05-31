@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:31:26 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 11:35:18 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:40:17 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,24 +44,27 @@ int	valid_colors_id(char *str)
 	return (0);
 }
 
-int	valid_rgb(char	*str)
+int	fill_each_color(t_parsing *parsing, char **color_splitted, int i)
 {
-	char	**color_splitted;
-	int		i;
+	char	**color_splitted2;
+	char	mode;
 
-	color_splitted = ft_split(str, ',');
-	if (!color_splitted)
-		return (printf("Error\n"), 0);
-	if (len_tab(color_splitted) != 3)
-		return (free_tab(color_splitted), 0);
-	i = 0;
-	while (color_splitted[i])
+	color_splitted2 = ft_split(color_splitted[i], ' ');
+	if (!color_splitted2)
+		return (-1);
+	mode = color_splitted2[0][0];
+	if (mode == 'F')
 	{
-		if (ft_atoi(color_splitted[i]) < 0 || ft_atoi(color_splitted[i]) > 255)
-			return (free_tab(color_splitted), 0);
-		i++;
+		parsing->color_floor = create_trgb(0, ft_atoi(color_splitted2[1]), \
+		ft_atoi(color_splitted[1]), ft_atoi(color_splitted[2]));
 	}
-	return (free_tab(color_splitted), 1);
+	if (mode == 'C')
+	{
+		parsing->color_ceiling = create_trgb(0, ft_atoi(color_splitted2[1]) \
+		, ft_atoi(color_splitted[1]), ft_atoi(color_splitted[2]));
+	}
+	free_tab(color_splitted2);
+	return (0);
 }
 
 char	*complete_line(char	*str, int size)

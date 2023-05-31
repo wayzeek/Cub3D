@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/30 15:02:32 by vcart            ###   ########.fr       */
+/*   Updated: 2023/05/31 13:32:08 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -185,7 +185,7 @@ char		**fill_map(char	*line, int map_size, int map_fd);
 int			len_tab(char **tab);
 int			valid_directions_id(char *str);
 int			valid_colors_id(char *str);
-int			valid_rgb(char	*str);
+int			fill_each_color(t_parsing *parsing, char **color_splitted, int i);
 char		*complete_line(char	*str, int size);
 
 // error_map.c

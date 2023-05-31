@@ -6,14 +6,14 @@
 #    By: vcart <vcart@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 08:32:06 by vcart             #+#    #+#              #
-#    Updated: 2023/05/30 13:38:49 by vcart            ###   ########.fr        #
+#    Updated: 2023/05/31 13:37:52 by vcart            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # Constants
 NAME			=	cub3D
 
-CFLAGS			=	-Wall -Wextra -g #-fsanitize=address # !!!!!!!!!!!!!! -Werror -02
+CFLAGS			=	-Wall -Wextra -Werror -O2
 
 RM				=	rm -rf
 
