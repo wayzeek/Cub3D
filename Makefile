@@ -13,7 +13,7 @@
 # Constants
 NAME			=	cub3D
 
-CFLAGS			=	-Wall -Wextra -Werror -O2
+CFLAGS			=	-Wall -Wextra #-Werror -O2
 
 RM				=	rm -rf
 

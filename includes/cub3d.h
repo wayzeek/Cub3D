@@ -27,7 +27,10 @@
 # define MAP_SIZE (WIN_WIDTH / 3)
 # define FOV (PI / 4)
 # define SPEED 5
-# define CEILLING 0xB0C4DE
+# define N_WALL 0xb7542d //brick
+# define S_WALL 0xa25133
+# define E_WALL 0x313332 //mojave
+# define W_WALL 0xbb7d58
 
 // Headers
 
@@ -125,6 +128,7 @@ typedef struct s_ray
 	t_point		hit;
 	double		angle;
 	int			sq_lenght;
+	int			side_hit;
 }	t_ray;
 
 // Player structure
