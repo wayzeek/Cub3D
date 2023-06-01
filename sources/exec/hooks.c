@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 12:27:02 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/01 17:38:53 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static int	check_possible_move(t_data *data, int keycode)
 {
 	t_point	next_pos;
 
+	next_pos.x = data->player.pos.x;
+	next_pos.y = data->player.pos.y;
 	if (keycode == W)
 	{
 		next_pos.x = data->player.pos.x + data->player.dir.x * SPEED;

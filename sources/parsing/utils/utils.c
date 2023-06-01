@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:47:55 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 15:31:36 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/01 20:27:53 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ int	get_map_size(char *map_name)
 
 	fd = open(map_name, O_RDONLY);
 	if (fd == -1)
-		return (printf("Error\n"), -1);
+		return (printf("Error can't open map file\n"), -1);
 	line = get_next_line(fd);
 	map_size = 0;
 	while (line)
@@ -62,7 +62,7 @@ char	*remove_spaces(char *line)
 	result = malloc(sizeof(char) * (len_no_spaces(line) + 1));
 	while (line[i])
 	{
-		if (!ft_contains(" \t\n\r\v\f", line[i]))
+		if (!ft_contains(" ", line[i]))
 		{
 			result[j] = line[i];
 			j++;

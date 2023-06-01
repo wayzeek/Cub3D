@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 15:15:15 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/01 20:20:22 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -203,6 +203,7 @@ int			line_is_closed(char *line);
 void		init_parsing(t_data *data);
 int			parsing_is_filled(t_data *data);
 int			get_index_first_char(char *str);
+int			check_extension(char *map_name);
 
 // utils.c
 
