@@ -1,39 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   error_map_utils.c                                  :+:      :+:    :+:   */
+/*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/04/28 11:53:00 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/23 11:35:15 by vcart            ###   ########.fr       */
+/*   Created: 2023/06/01 11:47:55 by vcart             #+#    #+#             */
+/*   Updated: 2023/06/01 15:31:36 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
 
-int	is_ok_for_map(char *line)
-{
-	int	i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (!ft_contains("01NSEW ", line[i]))
-			return (-1);
-		i++;
-	}
-	i = 0;
-	while (line[i])
-	{
-		if (ft_contains("NSEW ", line[i]))
-			return (2);
-		i++;
-	}
-	return (0);
-}
-
-int	len_no_spaces(char *line)
+static int	len_no_spaces(char *line)
 {
 	int	i;
 	int	len;
@@ -47,6 +26,29 @@ int	len_no_spaces(char *line)
 		i++;
 	}
 	return (len);
+}
+
+int	get_map_size(char *map_name)
+{
+	int		fd;
+	int		map_size;
+	char	*line;
+
+	fd = open(map_name, O_RDONLY);
+	if (fd == -1)
+		return (printf("Error\n"), -1);
+	line = get_next_line(fd);
+	map_size = 0;
+	while (line)
+	{
+		if (line[0] == '1' || line[0] == '0')
+			map_size++;
+		free(line);
+		line = get_next_line(fd);
+	}
+	free(line);
+	close(fd);
+	return (map_size + 1);
 }
 
 char	*remove_spaces(char *line)
@@ -71,36 +73,34 @@ char	*remove_spaces(char *line)
 	return (result);
 }
 
-int	get_map_size(int map_fd)
-{
-	int		size;
-	char	*line;
-
-	size = 0;
-	line = get_next_line(map_fd);
-	while (line)
-	{
-		if (line[0] != '\n')
-			size++;
-		free(line);
-		line = get_next_line(map_fd);
-	}
-	close(map_fd);
-	return (size - 7);
-}
-
-int	get_len_longest_line(char	**map)
+char	*remove_nl(char *line)
 {
 	int		i;
-	size_t	max;
+	int		j;
+	char	*result;
 
-	max = ft_strlen(map[0]);
-	i = 1;
-	while (map[i])
+	i = 0;
+	j = 0;
+	result = malloc(sizeof(char) * (ft_strlen(line) + 1));
+	while (line[i])
 	{
-		if (ft_strlen(map[i]) > max)
-			max = ft_strlen(map[i]);
+		if (!ft_contains("\n", line[i]))
+		{
+			result[j] = line[i];
+			j++;
+		}
 		i++;
 	}
-	return ((int)(max));
+	result[j] = '\0';
+	return (result);
+}
+
+int	len_tab(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return (i);
 }

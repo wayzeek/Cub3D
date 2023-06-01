@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:25:53 by jprofit           #+#    #+#             */
-/*   Updated: 2023/05/30 13:18:34 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/01 15:04:54 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,10 @@ int	main(int argc, char **argv)
 	(void)		argc;
 
 	if (get_parsing(&data, argv[1]) == -1)
-		return (1);
-	if (check_player(&data))
-		return (free_textures(&data.parsing), 1);
-	printf("Map is valid !\n\n");
+		return (free_all(&data), 1);
+	if (!parsing_is_filled(&data) || data.parsing.map == NULL)
+		return (printf("Error\n.cub file not completed properly\n"), free_all(&data), 1);
+	printf("Map is valid !\n");
 	init_all(&data);
 	data.win = mlx_new_window(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT, "Cub3D");
 	data.img.img = mlx_new_image(data.mlx_ptr, WIN_WIDTH, WIN_HEIGHT);
