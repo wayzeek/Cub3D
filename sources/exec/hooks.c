@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/30 11:29:56 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/01 12:27:02 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,8 +20,7 @@ static void	free_and_exit(t_data *data)
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	data->mlx_ptr = NULL;
-	free_textures(&data->parsing);
-	free_tab(data->parsing.map);
+	free_all(data);
 	exit(0);
 }
 
