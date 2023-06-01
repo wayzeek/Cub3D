@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:17:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 15:33:49 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/01 17:46:07 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,9 +72,16 @@ int	fill_map(t_data *data, char *line, int map_size, int map_fd)
 	i = 0;
 	while (line)
 	{
+		if (line[0] == '\n')
+			break ;
 		data->parsing.map[i] = remove_nl(line);
 		if (!data->parsing.map[i])
 			return (printf("Error\n"), free(line), -1);
+		if (data->parsing.map[i][0] == '\0')
+		{
+			free(data->parsing.map[i]);
+			break ;
+		}
 		if (i != 0)
 			free(line);
 		line = get_next_line(map_fd);

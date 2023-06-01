@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 09:54:37 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 15:27:29 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/01 20:27:27 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,11 @@ int	get_parsing(t_data *data, char *map_name)
 	char	*line;
 
 	init_parsing(data);
+	if (!check_extension(map_name))
+		return (printf("Error\nWrong map extension\n"), -1);
 	map_size = get_map_size(map_name);
+	if (map_size == -1)
+		return (-1);
 	map_fd = open(map_name, O_RDONLY);
 	if (map_fd == -1)
 		return (printf("Error\nCan't open map file\n"), -1);
@@ -33,14 +37,14 @@ int	get_parsing(t_data *data, char *map_name)
 			if (!line)
 				return (0);
 		}
-		if (line[get_index_first_char(line)] == 'F' && ft_contains(" \t\n\r\v\f", line[get_index_first_char(line) + 1]))
+		if (line[get_index_first_char(line)] == 'F' && line[get_index_first_char(line) + 1] == ' ')
 		{
 			if (data->parsing.color_floor != -1)
 				return (free(line), printf("Error\nFloor color already filled !\n"), -1);
 			if (fill_floor_ceiling(data, line, 'F') == -1)
 				return (free(line), -1);
 		}
-		else if (line[get_index_first_char(line)] == 'C' && ft_contains(" \t\n\r\v\f", line[get_index_first_char(line) + 1]))
+		else if (line[get_index_first_char(line)] == 'C' && line[get_index_first_char(line) + 1] == ' ')
 		{
 			if (data->parsing.color_ceiling != -1)
 				return (free(line), printf("Error\nCeiling color already filled !\n"), -1);

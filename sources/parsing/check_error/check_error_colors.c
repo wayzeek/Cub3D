@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:54:19 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 15:02:30 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/01 20:28:45 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ static int	check_only_num(char	*color)
 {
 	while (*color)
 	{
-		if (!ft_contains("0123456789  \t\n\r\v\f", *color))
+		if (!ft_contains("0123456789 \n", *color))
 			return (0);
 		color++;
 	}
