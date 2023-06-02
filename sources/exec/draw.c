@@ -70,19 +70,19 @@ void	draw_vert_ray(t_data *data, t_ray *ray)
 	double	length;
 
 	id = ray->id;
-	length = 1.0 / ray->sq_lenght * (WIN_WIDTH * WIN_WIDTH);
-	if (length > 10000)
-		length = WIN_HEIGHT;
+	ray->sq_lenght = 1.0 / ray->sq_lenght * (WIN_HEIGHT * 300);
+	if (ray->sq_lenght > 10000)
+		ray->sq_lenght = WIN_HEIGHT;
 	if (ray->side_hit == 0)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + length / 2}, N_WALL);
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, N_WALL);
 	else if (ray->side_hit == 1)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + length / 2}, S_WALL);
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, S_WALL);
 	else if (ray->side_hit == 2)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + length / 2}, E_WALL);
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, E_WALL);
 	else if (ray->side_hit == 3)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + length / 2}, W_WALL);
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, W_WALL);
 }
