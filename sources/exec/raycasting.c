@@ -63,13 +63,13 @@ static void	dda(t_data *data, t_ray *ray)
 		{
 			ray->sidedist.x += ray->deltadist.x;
 			ray->map.x += ray->step.x;
-			ray->side_hit = 0;
+			ray->last_incr = 'x';
 		}
 		else
 		{
 			ray->sidedist.y += ray->deltadist.y;
 			ray->map.y += ray->step.y;
-			ray->side_hit = 1;
+			ray->last_incr = 'y';
 		}
 		cell = (t_point){ray->map.x / data->tile_size, ray->map.y / data->tile_size};
 		if (data->parsing.map[cell.y][cell.x] == '1')
@@ -87,9 +87,14 @@ static void	show_angle(t_data *data, t_ray ray)
 		draw_segment(data, (t_vector){data->player.pos.x + data->tile_size / 8, data->player.pos.y + data->tile_size / 8}, (t_vector){ray.map.x, ray.map.y}, 0x3b0f42);
 }
 
+/*
+ * used to set side_hit to the appropriate value (0=N, 1=E, 2=S, 3=W)
+ * if the last increment is x, the side of the box that could have been hit are
+ * E or W, and if the step is positive it can only be the E side
+ */
 void	side_hit(t_ray *ray)
 {
-	if (ray->side_hit == 0)
+	if (ray->last_incr == 'x')
 	{
 		if (ray->step.x == 1)
 			ray->side_hit = 3;
