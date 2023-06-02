@@ -73,6 +73,16 @@ void	draw_vert_ray(t_data *data, t_ray *ray)
 	length = 1.0 / ray->sq_lenght * (WIN_WIDTH * WIN_WIDTH);
 	if (length > 10000)
 		length = WIN_HEIGHT;
-	draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + length / 2}, 0xeeff00);
+	if (ray->side_hit == 0)
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + length / 2}, N_WALL);
+	else if (ray->side_hit == 1)
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + length / 2}, S_WALL);
+	else if (ray->side_hit == 2)
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + length / 2}, E_WALL);
+	else if (ray->side_hit == 3)
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - length / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + length / 2}, W_WALL);
 }
