@@ -74,7 +74,7 @@ static void	dda(t_data *data, t_ray *ray)
 		cell = (t_point){ray->map.x / data->tile_size, ray->map.y / data->tile_size};
 		if (data->parsing.map[cell.y][cell.x] == '1')
 			hit = TRUE;
-		ray->sq_lenght = get_seg_length_squared(ray->start, ray->map); // * cos(ray->angle);
+		ray->sq_lenght = get_seg_length_squared(ray->start, ray->map) * cos(data->angle_master - ray->angle); // * cos(ray->angle);
 	}
 	ray->hit = (t_point){ray->map.x, ray->map.y};
 }

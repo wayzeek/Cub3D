@@ -21,11 +21,11 @@
 # define TRUE 1
 # define EMPTY 0
 # define WALL 1
-# define WIN_WIDTH 1500
+# define WIN_WIDTH 1000
 # define WIN_HEIGHT 1000
 # define PI 3.14159265358979323846
 # define MAP_SIZE (WIN_WIDTH / 3)
-# define FOV (PI / 4)
+# define FOV (PI / 3)
 # define SPEED 5
 # define N_WALL 0xb7542d
 # define S_WALL 0xa25133
