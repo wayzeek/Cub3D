@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/31 13:32:08 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/01 20:20:22 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -166,65 +166,57 @@ int			main(int argc, char **argv);
 
 // parsing.c
 
-int			get_parsing(t_data	*data, char	*map_name);
+int			get_parsing(t_data *data, char *map_name);
+
+// check_error_colors.c
+
+int			check_error_color(char *line);
+
+// check_map_error.c
+
+int			check_map_error(char **map);
+
+// fill_colors.c
+
+int			get_color(char	*line);
+
+// fill_directions.c
+
+char		*get_path(char *line);
 
 // fill_parsing.c
 
-int			create_trgb(int t, int r, int g, int b);
-int			get_map(t_parsing *parsing, int map_fd, int map_size);
-int			get_colors(t_parsing *parsing, int map_fd);
-int			get_textures(t_parsing *parsing, int map_fd);
-char		*go_to_beginning_text(int map_fd);
-
-// parsing_utils.c
-
-int			check_mode(char **line_splitted);
-int			exec_mode(t_parsing *parsing, int map_fd, int mode);
-int			fill_textures(char *line, t_parsing *parsing);
-int			fill_colors(char *line, t_parsing *parsing);
-char		**fill_map(char	*line, int map_size, int map_fd);
-
-
-// error_utils.c
-
-int			len_tab(char **tab);
-int			valid_directions_id(char *str);
-int			valid_colors_id(char *str);
-int			fill_each_color(t_parsing *parsing, char **color_splitted, int i);
-char		*complete_line(char	*str, int size);
-
-// error_map.c
-
-int			check_map(int map_fd, int size);
-int			check_line_map(char	*line);
-int			check_border(char *line);
-int			line_is_closed(char *line);
-int			map_is_closed(char	**map);
-
-// error_colors.c
-
-int			check_colors(int map_fd);
-int			check_line_colors(char	*line);
-
-// error_map_utils.c
-
-int			is_ok_for_map(char *line);
-char		*remove_spaces(char *line);
-int			get_map_size(int map_fd);
-int			get_len_longest_line(char	**map);
-
-// error_directions.c
-
-int			check_directions(int map_fd);
-int			check_line_directions(char	*line);
+int			fill_floor_ceiling(t_data *data, char *line, int mode);
+int			fill_directions(t_data *data, char *line, int mode);
+int			fill_map(t_data *data, char *line, int map_size, int map_fd);
 
 // free.c
 
 void		free_tab(char **tab);
-char		**complete_map(char	**map);
-void		free_textures(t_parsing *parsing);
-int			check_each_line(char	*line, int i, int size, int position);
-int			check_player(t_data *data);
+void		free_all(t_data *data);
+
+// map_utils.c
+
+int			get_len_longest_line(char	**map);
+char		*complete_line(char	*str, int size);
+char		**complete_map(char **map);
+int			check_border(char *line);
+int			line_is_closed(char *line);
+
+// parsing_utils.c
+
+void		init_parsing(t_data *data);
+int			parsing_is_filled(t_data *data);
+int			get_index_first_char(char *str);
+int			check_extension(char *map_name);
+
+// utils.c
+
+int			get_map_size(char *map_name);
+char		*remove_spaces(char *line);
+int			len_tab(char **tab);
+char		*remove_nl(char *line);
+
 
 // init.c
 

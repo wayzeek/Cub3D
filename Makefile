@@ -6,7 +6,7 @@
 #    By: vcart <vcart@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 08:32:06 by vcart             #+#    #+#              #
-#    Updated: 2023/05/31 13:37:52 by vcart            ###   ########.fr        #
+#    Updated: 2023/06/01 15:25:13 by vcart            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,12 +28,10 @@ LIBFT			=	${DIR_LIBFT}libft.a
 # Parsing directories path
 DIR_PARSING		=	${DIR_SRCS}parsing/
 
-# Parsing check_error directories path
+# Parsing sub-directories path
 
 DIR_ERROR		=	${DIR_PARSING}check_error/
-
-# Parsing utils directories path
-
+DIR_FILL		=	${DIR_PARSING}fill/
 DIR_UTILS		=	${DIR_PARSING}utils/
 
 # Exec directories path
@@ -41,14 +39,15 @@ DIR_EXEC		=	${DIR_SRCS}exec/
 
 # Parsing files
 PARSING_FILES	=	${DIR_PARSING}parsing.c \
-					${DIR_PARSING}fill_parsing.c \
-					${DIR_PARSING}parsing_utils.c \
-					${DIR_UTILS}error_utils.c \
-					${DIR_UTILS}error_map_utils.c \
+					${DIR_ERROR}check_error_colors.c \
+					${DIR_ERROR}check_map_error.c \
+					${DIR_FILL}fill_colors.c \
+					${DIR_FILL}fill_directions.c \
+					${DIR_FILL}fill_parsing.c \
 					${DIR_UTILS}free.c \
-					${DIR_ERROR}error_colors.c \
-					${DIR_ERROR}error_directions.c \
-					${DIR_ERROR}error_map.c 
+					${DIR_UTILS}map_utils.c \
+					${DIR_UTILS}parsing_utils.c \
+					${DIR_UTILS}utils.c \
 
 # Exec files
 EXEC_FILES		=	${DIR_SRCS}main.c	\
