@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:17:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 17:46:07 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/02 11:49:59 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@ int	fill_floor_ceiling(t_data *data, char *line, int mode)
 
 int	fill_directions(t_data *data, char *line, int mode)
 {
-	//if (check_error_directions(line))
-		//return (-1);
 	if (mode == 'N')
 	{
 		data->parsing.path_texture_north = get_path(line);
@@ -62,9 +60,27 @@ int	fill_directions(t_data *data, char *line, int mode)
 	return (0);
 }
 
+static int	fill_each_line(t_data *data, char *line, int i)
+{
+	if (line[0] == '\n')
+		return (0);
+	data->parsing.map[i] = remove_nl(line);
+	if (!data->parsing.map[i])
+		return (printf("Error\n"), free(line), -1);
+	if (data->parsing.map[i][0] == '\0')
+	{
+		free(data->parsing.map[i]);
+		return (0);
+	}
+	if (i != 0)
+		free(line);
+	return (1);
+}
+
 int	fill_map(t_data *data, char *line, int map_size, int map_fd)
 {
 	int	i;
+	int	ret;
 
 	data->parsing.map = malloc(sizeof(char *) * (map_size + 2));
 	if (!data->parsing.map)
@@ -72,18 +88,11 @@ int	fill_map(t_data *data, char *line, int map_size, int map_fd)
 	i = 0;
 	while (line)
 	{
-		if (line[0] == '\n')
+		ret = fill_each_line(data, line, i);
+		if (ret == 0)
 			break ;
-		data->parsing.map[i] = remove_nl(line);
-		if (!data->parsing.map[i])
-			return (printf("Error\n"), free(line), -1);
-		if (data->parsing.map[i][0] == '\0')
-		{
-			free(data->parsing.map[i]);
-			break ;
-		}
-		if (i != 0)
-			free(line);
+		if (ret == -1)
+			return (-1);
 		line = get_next_line(map_fd);
 		i++;
 	}
