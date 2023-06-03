@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 20:20:22 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/03 13:54:01 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,8 @@ typedef struct s_parsing
 
 	int		color_floor;
 	int		color_ceiling;
+
+	int		map_fd;
 
 	int		map_size_width;
 	char	**map;

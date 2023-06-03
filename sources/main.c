@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/04/28 10:25:53 by jprofit           #+#    #+#             */
-/*   Updated: 2023/06/01 15:04:54 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/03 14:01:20 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,9 @@
 int	main(int argc, char **argv)
 {
 	t_data		data;
-	(void)		argc;
 
+	if (argc != 2)
+		return (printf("Error\nPlease use : ./cub3D [map_path]\n"), 1);
 	if (get_parsing(&data, argv[1]) == -1)
 		return (free_all(&data), 1);
 	if (!parsing_is_filled(&data) || data.parsing.map == NULL)
