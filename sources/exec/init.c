@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:39:32 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/02 11:43:47 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/05 19:12:01 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,12 +69,14 @@ void	init_angle(t_data *data, int i)
 
 int	init_all(t_data *data)
 {
-	data->mlx_ptr = mlx_init();
 	data->tile_size = get_tile_size(data->parsing);
 	data->parsing.map_size_width = get_len_longest_line(data->parsing.map);
 	data->max_ray_lenght = 10 * data->tile_size;
 	data->minimap_length = data->tile_size * data->parsing.map_size_width;
 	data->minimap_height = data->tile_size * len_tab(data->parsing.map);
+	data->img_minimap.img = mlx_new_image(data->mlx_ptr, data->minimap_length, data->minimap_height);
+	data->img_minimap.addr = mlx_get_data_addr(data->img_minimap.img, &data->img_minimap.bits_per_pixel, \
+	&data->img_minimap.line_length, &data->img_minimap.endian);
 	get_player_position(data->parsing.map, data);
 	set_ray_master(data);
 	return (SUCCESS);
