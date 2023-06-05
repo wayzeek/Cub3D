@@ -70,9 +70,11 @@ void	draw_vert_ray(t_data *data, t_ray *ray)
 	double	length;
 
 	id = ray->id;
-	ray->sq_lenght = 1.0 / ray->sq_lenght * (WIN_HEIGHT * 300);
-	if (ray->sq_lenght > 10000)
+	ray->sq_lenght = (1.0 / ray->sq_lenght * WIN_HEIGHT) * 300;
+	if (ray->sq_lenght > WIN_HEIGHT || ray->sq_lenght < 0)
 		ray->sq_lenght = WIN_HEIGHT;
+    if (id >= 0 && id <= 20)
+        printf("ray %d, lenght %d\n", id, ray->sq_lenght);
 	if (ray->side_hit == 0)
 		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
 	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, N_WALL);
