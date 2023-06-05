@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/05 14:33:56 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/05 19:02:00 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,8 @@ void	draw_vert_ray(t_data *data, t_ray *ray)
 	ray->sq_lenght = (1.0 / ray->sq_lenght * WIN_HEIGHT) * 300;
 	if (ray->sq_lenght > WIN_HEIGHT || ray->sq_lenght < 0)
 		ray->sq_lenght = WIN_HEIGHT;
-    if (id >= 0 && id <= 20)
-        printf("ray %d, lenght %d\n", id, ray->sq_lenght);
+    //if (id >= 0 && id <= 20)
+      //  printf("ray %d, lenght %d\n", id, ray->sq_lenght);
 	if (ray->side_hit == 0)
 		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
 	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, N_WALL);

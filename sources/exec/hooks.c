@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 17:38:53 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/05 19:17:05 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,13 +14,13 @@
 
 static void	free_and_exit(t_data *data)
 {
+	free_all(data);
 	mlx_destroy_image(data->mlx_ptr, data->img.img);
 	mlx_destroy_image(data->mlx_ptr, data->img_minimap.img);
 	mlx_destroy_window(data->mlx_ptr, data->win);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
 	data->mlx_ptr = NULL;
-	free_all(data);
 	exit(0);
 }
 
