@@ -2,15 +2,14 @@
 
 F   192, 192 , 192
 
-SO     ./path_to_the_south_texture
-WE      ./path_
+SO     ./textures/SO.xpm
+WE      ./textures/WE.xpm
 
 
 C   135, 206 ,250
 
-NO     ./path_to_the_north_texture
-EA     ./path_to_the_east_texture
-
+NO     ./textures/NO.xpm
+EA     ./textures/EA.xpm
 
 11111111111111111   11111
 10000000000000001   10001

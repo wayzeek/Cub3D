@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:18:03 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 20:27:40 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/05 15:50:10 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,10 +16,10 @@ void	init_parsing(t_data *data)
 {
 	data->parsing.color_ceiling = -1;
 	data->parsing.color_floor = -1;
-	data->parsing.path_texture_north = NULL;
-	data->parsing.path_texture_south = NULL;
-	data->parsing.path_texture_west = NULL;
-	data->parsing.path_texture_east = NULL;
+	data->parsing.texture_north.img = NULL;
+	data->parsing.texture_south.img = NULL;
+	data->parsing.texture_west.img = NULL;
+	data->parsing.texture_east.img = NULL;
 	data->parsing.map = NULL;
 }
 
@@ -27,10 +27,10 @@ int	parsing_is_filled(t_data *data)
 {
 	if (data->parsing.color_floor != -1 && \
 	data->parsing.color_ceiling != -1 && \
-	data->parsing.path_texture_north != NULL \
-	&& data->parsing.path_texture_south != NULL \
-	&& data->parsing.path_texture_east != NULL \
-	&& data->parsing.path_texture_west != NULL)
+	data->parsing.texture_north.img != NULL \
+	&& data->parsing.texture_south.img != NULL \
+	&& data->parsing.texture_east.img != NULL \
+	&& data->parsing.texture_west.img != NULL)
 		return (1);
 	return (0);
 }
