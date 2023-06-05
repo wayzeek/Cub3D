@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/05/30 13:36:38 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/05 14:33:56 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void	print_square(t_data *data, int x, int y, int size)
 void	draw_vert_ray(t_data *data, t_ray *ray)
 {
 	int		id;
-	double	length;
+	//double	length;
 
 	id = ray->id;
 	ray->sq_lenght = 1.0 / ray->sq_lenght * (WIN_HEIGHT * 300);

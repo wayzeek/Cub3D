@@ -6,11 +6,21 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:17:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/02 11:49:59 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/05 15:57:32 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
+
+static t_img	ft_new_sprite(void *mlx, char *path)
+{
+	t_img	img;
+
+	img.img = mlx_xpm_file_to_image(mlx, path, &img.size.x, &img.size.y);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
+	return (img);
+}
 
 int	fill_floor_ceiling(t_data *data, char *line, int mode)
 {
@@ -33,30 +43,39 @@ int	fill_floor_ceiling(t_data *data, char *line, int mode)
 
 int	fill_directions(t_data *data, char *line, int mode)
 {
+	char	*path;
+
+	path = NULL;
 	if (mode == 'N')
 	{
-		data->parsing.path_texture_north = get_path(line);
-		if (data->parsing.path_texture_north == NULL)
-			return (-1);
+		path = get_path(line);
+		if (path == NULL)
+			return (free(path), -1);
+		data->parsing.texture_north = ft_new_sprite(data->mlx_ptr, path);
 	}
 	else if (mode == 'S')
 	{
-		data->parsing.path_texture_south = get_path(line);
-		if (data->parsing.path_texture_south == NULL)
-			return (-1);
+		path = get_path(line);
+		if (path == NULL)
+			return (free(path), -1);
+		 data->parsing.texture_south = ft_new_sprite(data->mlx_ptr, path);
 	}
 	else if (mode == 'W')
 	{
-		data->parsing.path_texture_west = get_path(line);
-		if (data->parsing.path_texture_west == NULL)
-			return (-1);
+		path = get_path(line);
+		if (path == NULL)
+			return (free(path), -1);
+		 data->parsing.texture_west = ft_new_sprite(data->mlx_ptr, path);
+
 	}
 	else if (mode == 'E')
 	{
-		data->parsing.path_texture_east = get_path(line);
-		if (data->parsing.path_texture_east == NULL)
-			return (-1);
+		path = get_path(line);
+		if (path == NULL)
+			return (free(path), -1);
+		 data->parsing.texture_east = ft_new_sprite(data->mlx_ptr, path);
 	}
+	free(path);
 	return (0);
 }
 
