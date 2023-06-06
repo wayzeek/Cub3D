@@ -6,11 +6,21 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:17:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 17:46:07 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/05 19:04:34 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../../includes/cub3d.h"
+
+static t_img	ft_new_sprite(void *mlx, char *path)
+{
+	t_img	img;
+
+	img.img = mlx_xpm_file_to_image(mlx, path, &img.size.x, &img.size.y);
+	img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel,
+			&img.line_length, &img.endian);
+	return (img);
+}
 
 int	fill_floor_ceiling(t_data *data, char *line, int mode)
 {
@@ -33,38 +43,63 @@ int	fill_floor_ceiling(t_data *data, char *line, int mode)
 
 int	fill_directions(t_data *data, char *line, int mode)
 {
-	//if (check_error_directions(line))
-		//return (-1);
+	char	*path;
+
+	path = NULL;
 	if (mode == 'N')
 	{
-		data->parsing.path_texture_north = get_path(line);
-		if (data->parsing.path_texture_north == NULL)
-			return (-1);
+		path = get_path(line);
+		if (path == NULL)
+			return (free(path), -1);
+		data->parsing.texture_north = ft_new_sprite(data->mlx_ptr, path);
 	}
 	else if (mode == 'S')
 	{
-		data->parsing.path_texture_south = get_path(line);
-		if (data->parsing.path_texture_south == NULL)
-			return (-1);
+		path = get_path(line);
+		if (path == NULL)
+			return (free(path), -1);
+		 data->parsing.texture_south = ft_new_sprite(data->mlx_ptr, path);
 	}
 	else if (mode == 'W')
 	{
-		data->parsing.path_texture_west = get_path(line);
-		if (data->parsing.path_texture_west == NULL)
-			return (-1);
+		path = get_path(line);
+		if (path == NULL)
+			return (free(path), -1);
+		 data->parsing.texture_west = ft_new_sprite(data->mlx_ptr, path);
+
 	}
 	else if (mode == 'E')
 	{
-		data->parsing.path_texture_east = get_path(line);
-		if (data->parsing.path_texture_east == NULL)
-			return (-1);
+		path = get_path(line);
+		if (path == NULL)
+			return (free(path), -1);
+		 data->parsing.texture_east = ft_new_sprite(data->mlx_ptr, path);
 	}
+	free(path);
 	return (0);
+}
+
+static int	fill_each_line(t_data *data, char *line, int i)
+{
+	if (line[0] == '\n')
+		return (0);
+	data->parsing.map[i] = remove_nl(line);
+	if (!data->parsing.map[i])
+		return (printf("Error\n"), free(line), -1);
+	if (data->parsing.map[i][0] == '\0')
+	{
+		free(data->parsing.map[i]);
+		return (0);
+	}
+	if (i != 0)
+		free(line);
+	return (1);
 }
 
 int	fill_map(t_data *data, char *line, int map_size, int map_fd)
 {
 	int	i;
+	int	ret;
 
 	data->parsing.map = malloc(sizeof(char *) * (map_size + 2));
 	if (!data->parsing.map)
@@ -72,18 +107,11 @@ int	fill_map(t_data *data, char *line, int map_size, int map_fd)
 	i = 0;
 	while (line)
 	{
-		if (line[0] == '\n')
+		ret = fill_each_line(data, line, i);
+		if (ret == 0)
 			break ;
-		data->parsing.map[i] = remove_nl(line);
-		if (!data->parsing.map[i])
-			return (printf("Error\n"), free(line), -1);
-		if (data->parsing.map[i][0] == '\0')
-		{
-			free(data->parsing.map[i]);
-			break ;
-		}
-		if (i != 0)
-			free(line);
+		if (ret == -1)
+			return (-1);
 		line = get_next_line(map_fd);
 		i++;
 	}

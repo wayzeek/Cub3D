@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 20:20:22 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/05 15:47:45 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,29 +71,6 @@ typedef enum e_keycode
 	UP = 65362,
 }	t_keycode;
 
-// Parsing structure
-
-typedef struct s_parsing
-{
-	char	*path_texture_north;
-	char	*path_texture_south;
-	char	*path_texture_west;
-	char	*path_texture_east;
-
-	int		color_floor;
-	int		color_ceiling;
-
-	int		map_size_width;
-	char	**map;
-}	t_parsing;
-
-// Vector structure
-
-typedef struct s_vector
-{
-	double	x;
-	double	y;
-}	t_vector;
 
 // Point structure
 
@@ -112,7 +89,34 @@ typedef struct s_img
 	int		bits_per_pixel;
 	int		line_length;
 	int		endian;
+	t_point	size;
 }	t_img;
+
+// Parsing structure
+
+typedef struct s_parsing
+{
+	t_img	texture_north;
+	t_img	texture_south;
+	t_img	texture_east;
+	t_img	texture_west;
+
+	int		color_floor;
+	int		color_ceiling;
+
+	int		map_fd;
+
+	int		map_size_width;
+	char	**map;
+}	t_parsing;
+
+// Vector structure
+
+typedef struct s_vector
+{
+	double	x;
+	double	y;
+}	t_vector;
 
 // Ray structure
 
@@ -195,7 +199,7 @@ int			fill_map(t_data *data, char *line, int map_size, int map_fd);
 void		free_tab(char **tab);
 void		free_all(t_data *data);
 
-// map_utils.c
+// map_utils.cinit_pars
 
 int			get_len_longest_line(char	**map);
 char		*complete_line(char	*str, int size);
