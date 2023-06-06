@@ -115,10 +115,9 @@ void	side_hit(t_ray *ray)
 static void	calculate_length(t_data *data, t_ray *ray)
 {
 	if (ray->last_incr == 'x')
-		ray->perp_length = (ray->sidedist.x - ray->deltadist.x) * data->tile_size;
+		ray->length = (ray->sidedist.x - ray->deltadist.x) * data->tile_size;
 	else
-		ray->perp_length = (ray->sidedist.y - ray->deltadist.y) * data->tile_size;
-	if (ray->id == 700)
+		ray->length = (ray->sidedist.y - ray->deltadist.y) * data->tile_size;
 }
 
 void	raycasting(t_data *data)
