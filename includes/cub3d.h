@@ -127,7 +127,8 @@ typedef struct s_ray
 	t_vector	sidedist;
 	t_point		hit;
 	double		angle;
-	int			sq_lenght;
+	int			sq_length;
+	float		perp_length;
 	char		last_incr;
 	int			side_hit;
 }	t_ray;
