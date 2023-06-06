@@ -61,7 +61,7 @@ void	print_square(t_data *data, int x, int y, int size)
 }
 
 /*
- * draw for each ray the wall
+ * draw for each ray the wall (a centered segment)
  * calculate the height of the wall based on the lenght of the ray
  */
 void	draw_vert_ray(t_data *data, t_ray *ray)
@@ -70,21 +70,21 @@ void	draw_vert_ray(t_data *data, t_ray *ray)
 	//double	length;
 
 	id = ray->id;
-	ray->sq_lenght = (1.0 / ray->sq_lenght * WIN_HEIGHT) * 300;
-	if (ray->sq_lenght > WIN_HEIGHT || ray->sq_lenght < 0)
-		ray->sq_lenght = WIN_HEIGHT;
-    //if (id >= 0 && id <= 20)
-      //  printf("ray %d, lenght %d\n", id, ray->sq_lenght);
+	ray->length = (1.0 / ray->length * WIN_HEIGHT) * 300; //arbitrary
+	if (ray->length > WIN_HEIGHT || ray->length < 0)
+		ray->length = WIN_HEIGHT;
+//    if (id >= 0 && id <= 20)
+//        printf("ray %d, lenght %d\n", id, ray->sq_length);
 	if (ray->side_hit == 0)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, N_WALL);
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->length / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + ray->length / 2}, N_WALL);
 	else if (ray->side_hit == 1)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, S_WALL);
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->length / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + ray->length / 2}, S_WALL);
 	else if (ray->side_hit == 2)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, E_WALL);
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->length / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + ray->length / 2}, E_WALL);
 	else if (ray->side_hit == 3)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->sq_lenght / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + ray->sq_lenght / 2}, W_WALL);
+		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->length / 2}, \
+	(t_vector){id, WIN_HEIGHT / 2 + ray->length / 2}, W_WALL);
 }

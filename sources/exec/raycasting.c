@@ -74,7 +74,6 @@ static void	dda(t_data *data, t_ray *ray)
 		cell = (t_point){ray->map.x / data->tile_size, ray->map.y / data->tile_size};
 		if (data->parsing.map[cell.y][cell.x] == '1')
 			hit = TRUE;
-		ray->sq_lenght = get_seg_length_squared(ray->start, ray->map) * cos(data->angle_master - ray->angle); // * cos(ray->angle);
 	}
 	ray->hit = (t_point){ray->map.x, ray->map.y};
 }
@@ -110,6 +109,17 @@ void	side_hit(t_ray *ray)
 	}
 }
 
+/*
+ * calculates the length of the ray
+ */
+static void	calculate_length(t_data *data, t_ray *ray)
+{
+	if (ray->last_incr == 'x')
+		ray->length = (ray->sidedist.x - ray->deltadist.x) * data->tile_size;
+	else
+		ray->length = (ray->sidedist.y - ray->deltadist.y) * data->tile_size;
+}
+
 void	raycasting(t_data *data)
 {
 	int	i;
@@ -120,6 +130,7 @@ void	raycasting(t_data *data)
 		init_angle(data, i);
 		init_dda(data, &data->ray_tab[i], i);
 		dda(data, &data->ray_tab[i]);
+		calculate_length(data, &data->ray_tab[i]);
 		side_hit(&data->ray_tab[i]);
 		show_angle(data, data->ray_tab[i]);
 		draw_vert_ray(data, &data->ray_tab[i]);
