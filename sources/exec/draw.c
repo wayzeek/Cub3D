@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/05 19:02:00 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/07 15:37:29 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,25 +66,8 @@ void	print_square(t_data *data, int x, int y, int size)
  */
 void	draw_vert_ray(t_data *data, t_ray *ray)
 {
-	int		id;
-	//double	length;
-
-	id = ray->id;
 	ray->length = (1.0 / ray->length * WIN_HEIGHT) * 300; //arbitrary
 	if (ray->length > WIN_HEIGHT || ray->length < 0)
 		ray->length = WIN_HEIGHT;
-//    if (id >= 0 && id <= 20)
-//        printf("ray %d, lenght %d\n", id, ray->sq_length);
-	if (ray->side_hit == 0)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->length / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + ray->length / 2}, N_WALL);
-	else if (ray->side_hit == 1)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->length / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + ray->length / 2}, S_WALL);
-	else if (ray->side_hit == 2)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->length / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + ray->length / 2}, E_WALL);
-	else if (ray->side_hit == 3)
-		draw_seg(data, (t_vector){id, WIN_HEIGHT / 2 - ray->length / 2}, \
-	(t_vector){id, WIN_HEIGHT / 2 + ray->length / 2}, W_WALL);
+	draw_seg(data, ray);
 }

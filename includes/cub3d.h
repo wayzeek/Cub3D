@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/05 15:47:45 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/07 14:39:01 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@
 # define TRUE 1
 # define EMPTY 0
 # define WALL 1
-# define WIN_WIDTH 1000
+# define WIN_WIDTH 1500
 # define WIN_HEIGHT 1000
 # define PI 3.14159265358979323846
 # define MAP_SIZE (WIN_WIDTH / 3)
@@ -134,6 +134,11 @@ typedef struct s_ray
 	int			length;
 	char		last_incr;
 	int			side_hit;
+
+	int			boolean;
+
+	t_img		*texture;
+	int			x;
 }	t_ray;
 
 // Player structure
@@ -241,8 +246,9 @@ void		draw_vert_ray(t_data *data, t_ray *ray);
 // draw_utils.c
 
 void		draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color);
-void		draw_seg(t_data *data, t_vector vec1, t_vector vec2, int color);
+void		draw_seg(t_data *data, t_ray *ray);
 void		floor_ceiling(t_data *data);
+int			get_text_color(t_img *data, int x, int y);
 
 // hooks.c
 
