@@ -68,29 +68,29 @@ static int	check_possible_move(t_data *data, int keycode)
 
 static void	handle_move(t_data *data, int keycode)
 {
+	(void)check_possible_move(data, keycode);
 	if (!check_possible_move(data, keycode))
 		return ;
 	if (keycode == W)
 	{
-		data->player.pos.x += data->player.dir.x * SPEED;
-		data->player.pos.y += data->player.dir.y * SPEED;
+		data->player.pos.x += (int)(data->player.dir.x * SPEED);
+		data->player.pos.y += (int)(data->player.dir.y * SPEED);
 	}
 	else if (keycode == S)
 	{
-		data->player.pos.x -= data->player.dir.x * SPEED;
-		data->player.pos.y -= data->player.dir.y * SPEED;
+		data->player.pos.x -= (int)(data->player.dir.x * SPEED);
+		data->player.pos.y -= (int)(data->player.dir.y * SPEED);
 	}
 	else if (keycode == A)
 	{
-		data->player.pos.x += data->player.dir.y * SPEED;
-		data->player.pos.y -= data->player.dir.x * SPEED;
+		data->player.pos.x += (int)(data->player.dir.y * SPEED);
+		data->player.pos.y -= (int)(data->player.dir.x * SPEED);
 	}
 	else if (keycode == D)
 	{
-		data->player.pos.x -= data->player.dir.y * SPEED;
-		data->player.pos.y += data->player.dir.x * SPEED;
+		data->player.pos.x -=(int)(data->player.dir.y * SPEED);
+		data->player.pos.y += (int)(data->player.dir.x * SPEED);
 	}
-	print_img(data);
 }
 
 int	key_hook(int keycode, t_data *data)
@@ -98,7 +98,7 @@ int	key_hook(int keycode, t_data *data)
 	(void)data;
 	if (keycode == ESQ)
 		free_and_exit(data);
-	if (keycode == W || keycode == S || keycode == A || keycode == D)
+	else if (keycode == W || keycode == S || keycode == A || keycode == D)
 		handle_move(data, keycode);
 	else if (keycode == LEFT || keycode == RIGHT)
 	{
@@ -108,7 +108,7 @@ int	key_hook(int keycode, t_data *data)
 			data->angle_master += 0.1;
 		data->player.dir.x = cos(data->angle_master);
 		data->player.dir.y = sin(data->angle_master);
-		print_img(data);
 	}
+	print_img(data);
 	return (1);
 }
