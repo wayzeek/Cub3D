@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:17:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/05 19:04:34 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/07 19:00:16 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,7 @@ int	fill_directions(t_data *data, char *line, int mode)
 	char	*path;
 
 	path = NULL;
+	line[ft_strlen(line) - 1] = '\0';
 	if (mode == 'N')
 	{
 		path = get_path(line);
@@ -81,7 +82,7 @@ int	fill_directions(t_data *data, char *line, int mode)
 
 static int	fill_each_line(t_data *data, char *line, int i)
 {
-	if (line[0] == '\n')
+	if (is_empty_line(line))
 		return (0);
 	data->parsing.map[i] = remove_nl(line);
 	if (!data->parsing.map[i])
@@ -119,6 +120,5 @@ int	fill_map(t_data *data, char *line, int map_size, int map_fd)
 	free(line);
 	if (check_map_error(data->parsing.map) == -1)
 		return (-1);
-	data->parsing.map_size_width = len_tab(data->parsing.map);
 	return (0);
 }

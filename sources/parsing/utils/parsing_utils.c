@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 10:18:03 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/05 15:50:10 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/07 18:46:40 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,19 @@ int	check_extension(char *map_name)
 	if (map_name[i - 1] != 'b' || map_name[i - 2] != 'u' \
 	|| map_name[i - 3] != 'c' || map_name[i - 4] != '.')
 		return (0);
+	return (1);
+}
+
+int	is_empty_line(char *line)
+{
+	int	i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_contains(" \n", line[i]))
+			return (0);
+		i++;
+	}
 	return (1);
 }

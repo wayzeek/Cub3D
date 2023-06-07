@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:42:58 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/01 15:35:10 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/07 19:54:50 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int	get_len_longest_line(char	**map)
 	int		i;
 	size_t	max;
 
+	i = 0;
 	max = ft_strlen(map[0]);
 	i = 1;
 	while (map[i])
