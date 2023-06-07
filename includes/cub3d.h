@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/07 14:39:01 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/07 19:54:20 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -218,6 +218,7 @@ void		init_parsing(t_data *data);
 int			parsing_is_filled(t_data *data);
 int			get_index_first_char(char *str);
 int			check_extension(char *map_name);
+int			is_empty_line(char *line);
 
 // utils.c
 
@@ -254,6 +255,7 @@ int			get_text_color(t_img *data, int x, int y);
 
 int			key_hook(int keycode, t_data *data);
 int			hook(void *mlx);
+void		free_and_exit(t_data *data);
 
 // raycasting.c
 
