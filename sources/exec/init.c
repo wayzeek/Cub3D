@@ -64,7 +64,7 @@ static void	get_player_position(char **map, t_data *data)
  */
 void	init_angle(t_data *data, int i)
 {
-	data->ray_tab[i].angle = data->angle_master + ((double)i / WIN_WIDTH * FOV) - FOV / 2;
+	data->ray_tab[i].angle = 2 * -atan((WIN_WIDTH / 2 - i + 0.5) / WIN_WIDTH / 2) + data->angle_master;
 }
 
 int	init_all(t_data *data)
