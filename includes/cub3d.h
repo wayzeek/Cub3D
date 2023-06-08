@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/08 11:07:37 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 11:56:39 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,7 @@
 # define PI 3.14159265358979323846
 # define MAP_SIZE (WIN_WIDTH / 3)
 # define FOV (PI / 3)
-# define SPEED 5
-# define N_WALL 0xb7542d
-# define S_WALL 0xa25133
-# define E_WALL 0x313332
-# define W_WALL 0xbb7d58
+# define SPEED 2.5
 
 // Headers
 

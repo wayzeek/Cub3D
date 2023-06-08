@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/08 11:41:08 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 11:56:33 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,9 +103,9 @@ int	key_hook(int keycode, t_data *data)
 	else if (keycode == LEFT || keycode == RIGHT)
 	{
 		if (keycode == LEFT)
-			data->angle_master -= 0.1;
+			data->angle_master -= 0.05;
 		else
-			data->angle_master += 0.1;
+			data->angle_master += 0.05;
 		data->player.dir.x = cos(data->angle_master);
 		data->player.dir.y = sin(data->angle_master);
 	}
