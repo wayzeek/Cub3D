@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/07 15:37:29 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 11:09:13 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,14 +60,3 @@ void	print_square(t_data *data, int x, int y, int size)
 	}
 }
 
-/*
- * draw for each ray the wall (a centered segment)
- * calculate the height of the wall based on the lenght of the ray
- */
-void	draw_vert_ray(t_data *data, t_ray *ray)
-{
-	ray->length = (1.0 / ray->length * WIN_HEIGHT) * 300; //arbitrary
-	if (ray->length > WIN_HEIGHT || ray->length < 0)
-		ray->length = WIN_HEIGHT;
-	draw_seg(data, ray);
-}

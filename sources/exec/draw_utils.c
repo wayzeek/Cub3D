@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:34:37 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/07 15:40:23 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 11:28:44 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ void	draw_seg(t_data *data, t_ray *ray)
 	int 		y;
 
 	// Getting start and end of the line to draw
-	int lineheight = (int)(ray->length);
+	int lineheight = (int)(WIN_HEIGHT / ray->length * 3.5);
 	int drawstart = -lineheight / 2 + WIN_HEIGHT / 2;
 	if (drawstart < 0)
 		drawstart = 0;
@@ -95,7 +95,7 @@ void	draw_seg(t_data *data, t_ray *ray)
 		tex_x = ray->texture->size.x - tex_x - 1;
 	else if (ray->side_hit >= 2 && ray->dir.y < 0)
 		tex_x = ray->texture->size.x - tex_x - 1;
-	
+
 	// Calculate the step of the texture
 	double step = 1.0 * ray->texture->size.y / lineheight;
 

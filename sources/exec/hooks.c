@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/07 18:08:26 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 11:41:08 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,9 @@ static int	check_possible_move(t_data *data, int keycode)
 		return (0);
 	if (data->parsing.map[next_pos.y / data->tile_size] \
 	[next_pos.x / data->tile_size] == '1')
+		return (0);
+	if (data->parsing.map[next_pos.y / data->tile_size] \
+	[next_pos.x / data->tile_size] == ' ')
 		return (0);
 	return (1);
 }

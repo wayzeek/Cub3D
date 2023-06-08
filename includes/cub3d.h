@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/07 19:54:20 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 11:07:37 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -131,7 +131,7 @@ typedef struct s_ray
 	t_vector	sidedist;
 	t_point		hit;
 	double		angle;
-	int			length;
+	double		length;
 	char		last_incr;
 	int			side_hit;
 
