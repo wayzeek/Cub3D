@@ -67,7 +67,6 @@ typedef enum e_keycode
 	UP = 65362,
 }	t_keycode;
 
-
 // Point structure
 
 typedef struct s_point
@@ -222,7 +221,6 @@ int			get_map_size(char *map_name);
 char		*remove_spaces(char *line);
 int			len_tab(char **tab);
 char		*remove_nl(char *line);
-
 
 // init.c
 

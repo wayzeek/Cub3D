@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:34:37 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/08 15:08:08 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 15:43:25 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,17 @@ void	draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color)
 
 	delta.x = vec2.x - vec1.x;
 	delta.y = vec2.y - vec1.y;
-
 	if (abs(delta.x) > abs(delta.y))
 		steps = abs(delta.x);
 	else
 		steps = abs(delta.y);
 	increment.x = delta.x / (float)steps;
 	increment.y = delta.y / (float)steps;
-
 	i = -1;
 	while (++i <= steps)
 	{
-		if (vec1.x >= 0 && vec1.x <= data->minimap_length && vec1.y >= 0 && vec1.y <= data->minimap_height)
+		if (vec1.x >= 0 && vec1.x <= data->minimap_length \
+			&& vec1.y >= 0 && vec1.y <= data->minimap_height)
 			mlx_pixel_put_img(&data->img_minimap, vec1.x, vec1.y, color);
 		vec1.x += increment.x;
 		vec1.y += increment.y;
@@ -61,10 +60,9 @@ void	draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color)
 
 void	draw_seg(t_data *data, t_ray *ray)
 {
-	double 		wall_x;
-	int 		y;
+	double	wall_x;
+	int		y;
 
-	// Getting start and end of the line to draw
 	int lineheight = (int)(WIN_HEIGHT / ray->length);
 	int drawstart = -lineheight / 2 + WIN_HEIGHT / 2;
 	if (drawstart < 0)
@@ -82,8 +80,6 @@ void	draw_seg(t_data *data, t_ray *ray)
 		ray->texture = &data->parsing.texture_south;
 	else if (ray->side_hit == 3)
 		ray->texture = &data->parsing.texture_west;
-
-	// Calculate the X coordinate of the wall hit
 	if (ray->boolean)
 		wall_x = ray->start.y + ray->length * ray->dir.y;
 	else
@@ -126,7 +122,8 @@ void	floor_ceiling(t_data *data)
 		while (y < WIN_HEIGHT / 2)
 		{
 			mlx_pixel_put_img(&data->img, x, y, data->parsing.color_ceiling);
-			mlx_pixel_put_img(&data->img, x, y + WIN_HEIGHT / 2, data->parsing.color_floor);
+			mlx_pixel_put_img(&data->img, x, y + WIN_HEIGHT / 2, \
+			data->parsing.color_floor);
 			y++;
 		}
 		x++;
@@ -142,8 +139,8 @@ int	get_text_color(t_img *data, int x, int y)
 		x *= -1;
 	if (y < 0)
 		y *= -1;
-	dst = data->addr + (y % data->size.y * data->line_length + x % data->size.x * \
-		(data->bits_per_pixel / 8));
+	dst = data->addr + (y % data->size.y * data->line_length \
+		+ x % data->size.x * (data->bits_per_pixel / 8));
 	color = *(unsigned int *)dst;
 	return (color);
 }

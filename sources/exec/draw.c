@@ -59,4 +59,3 @@ void	print_square(t_data *data, int x, int y, int size)
 		i++;
 	}
 }
-

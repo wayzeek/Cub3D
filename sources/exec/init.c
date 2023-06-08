@@ -64,7 +64,8 @@ static void	get_player_position(char **map, t_data *data)
  */
 void	init_angle(t_data *data, int i)
 {
-	data->ray_tab[i].angle = 2 * -atan((WIN_WIDTH / 2 - i + 0.5) / WIN_WIDTH / 2) + data->angle_master;
+	data->ray_tab[i].angle = \
+	2 * -atan((WIN_WIDTH / 2 - i + 0.5) / WIN_WIDTH / 2) + data->angle_master;
 }
 
 int	init_all(t_data *data)
@@ -74,9 +75,11 @@ int	init_all(t_data *data)
 	data->max_ray_lenght = 10 * data->tile_size;
 	data->minimap_length = data->tile_size * data->parsing.map_size_width;
 	data->minimap_height = data->tile_size * len_tab(data->parsing.map);
-	data->img_minimap.img = mlx_new_image(data->mlx_ptr, data->minimap_length, data->minimap_height);
-	data->img_minimap.addr = mlx_get_data_addr(data->img_minimap.img, &data->img_minimap.bits_per_pixel, \
-	&data->img_minimap.line_length, &data->img_minimap.endian);
+	data->img_minimap.img = mlx_new_image(data->mlx_ptr, \
+		data->minimap_length, data->minimap_height);
+	data->img_minimap.addr = mlx_get_data_addr(data->img_minimap.img, \
+		&data->img_minimap.bits_per_pixel, &data->img_minimap.line_length, \
+		&data->img_minimap.endian);
 	get_player_position(data->parsing.map, data);
 	set_ray_master(data);
 	return (SUCCESS);
