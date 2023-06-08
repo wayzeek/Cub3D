@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/08 11:56:33 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 15:46:46 by jprofit          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	hook(void *mlx)
 	exit (0);
 }
 
-static int	check_possible_move(t_data *data, int keycode)
+static t_point	simulate_next_pos(t_data *data, int keycode)
 {
 	t_point	next_pos;
 
@@ -54,6 +54,14 @@ static int	check_possible_move(t_data *data, int keycode)
 		next_pos.x = data->player.pos.x - data->player.dir.y * SPEED;
 		next_pos.y = data->player.pos.y + data->player.dir.x * SPEED;
 	}
+	return (next_pos);
+}
+
+static int	check_possible_move(t_data *data, int keycode)
+{
+	t_point	next_pos;
+
+	next_pos = simulate_next_pos(data, keycode);
 	if (!data->parsing.map[next_pos.y / data->tile_size] || !data->parsing.map \
 	[next_pos.y / data->tile_size][next_pos.x / data->tile_size])
 		return (0);

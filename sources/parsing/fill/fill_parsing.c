@@ -82,7 +82,6 @@ int	fill_directions(t_data *data, char *line, int mode)
 		data->parsing.texture_west = ft_new_sprite(data->mlx_ptr, path);
 		if (check_texture(data->parsing.texture_west))
 			return (free(path), -1);
-
 	}
 	else if (mode == 'E')
 	{

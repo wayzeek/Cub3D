@@ -42,5 +42,6 @@ void	print_img(t_data *data)
 	floor_ceiling(data);
 	raycasting(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win, data->img.img, 0, 0);
-	mlx_put_image_to_window(data->mlx_ptr, data->win, data->img_minimap.img, 0, 0);
+	mlx_put_image_to_window(data->mlx_ptr, data->win, data->img_minimap.img, \
+		0, 0);
 }
