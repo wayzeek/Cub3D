@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:49:20 by jprofit           #+#    #+#             */
-/*   Updated: 2023/06/07 14:39:29 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 11:09:19 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void	side_hit(t_ray *ray)
 {
 	if (ray->last_incr == 'x')
 	{
-		ray->boolean = 0;
+		ray->boolean = 1;
 		if (ray->step.x == 1)
 			ray->side_hit = 3;
 		else
@@ -103,7 +103,7 @@ void	side_hit(t_ray *ray)
 	}
 	else
 	{
-		ray->boolean = 1;
+		ray->boolean = 0;
 		if (ray->step.y == 1)
 			ray->side_hit = 0;
 		else
@@ -114,12 +114,12 @@ void	side_hit(t_ray *ray)
 /*
  * calculates the length of the ray
  */
-static void	calculate_length(t_data *data, t_ray *ray)
+static void	calculate_length(t_ray *ray)
 {
 	if (ray->last_incr == 'x')
-		ray->length = (ray->sidedist.x - ray->deltadist.x) * data->tile_size;
+		ray->length = (ray->sidedist.x - ray->deltadist.x);
 	else
-		ray->length = (ray->sidedist.y - ray->deltadist.y) * data->tile_size;
+		ray->length = (ray->sidedist.y - ray->deltadist.y);
 }
 
 void	raycasting(t_data *data)
@@ -132,10 +132,10 @@ void	raycasting(t_data *data)
 		init_angle(data, i);
 		init_dda(data, &data->ray_tab[i], i);
 		dda(data, &data->ray_tab[i]);
-		calculate_length(data, &data->ray_tab[i]);
+		calculate_length(&data->ray_tab[i]);
 		side_hit(&data->ray_tab[i]);
 		show_angle(data, data->ray_tab[i]);
 		data->ray_tab[i].x = i;
-		draw_vert_ray(data, &data->ray_tab[i]);
+		draw_seg(data, &data->ray_tab[i]);
 	}
 }
