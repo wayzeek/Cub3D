@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 09:54:37 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/05 15:48:16 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/08 13:20:35 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,7 @@ texture already filled !\n"), -1);
 			}
 			else
 				return (free(line), printf("Error\nMap \
-is not in last position or is already filled!\n"), -1);
+is not in last position or missing parameters!\n"), -1);
 		}
 		else
 			return (free(line), printf("Error\nInvalid identifier !\n"), -1);
