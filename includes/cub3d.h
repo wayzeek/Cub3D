@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/13 15:11:56 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 20:36:40 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,15 +17,11 @@
 
 # define SUCCESS 0
 # define ERROR 1
-# define FALSE 0
-# define TRUE 1
-# define EMPTY 0
-# define WALL 1
-# define WIN_WIDTH 1500
+# define WIN_WIDTH 1000
 # define WIN_HEIGHT 1000
 # define PI 3.14159265358979323846
-# define MAP_SIZE (WIN_WIDTH / 3)
-# define FOV (PI / 3)
+# define MAP_SIZE 333
+# define FOV 1.0471975512
 # define SPEED 3
 
 // Headers
@@ -194,19 +190,23 @@ int			get_color(char	*line);
 // fill_directions.c
 
 char		*get_path(char *line);
+int			fill_directions(t_data *data, char *line, int mode);
 
 // fill_parsing.c
 
 int			fill_floor_ceiling(t_data *data, char *line, int mode);
 int			fill_directions(t_data *data, char *line, int mode);
 int			fill_map(t_data *data, char *line, int map_size, int map_fd);
+t_img		ft_new_sprite(void *mlx, char *path);
+int			check_texture(t_img texture);
 
 // free.c
 
 void		free_tab(char **tab);
 void		free_all(t_data *data);
+void		free_and_exit(t_data *data);
 
-// map_utils.cinit_pars
+// map_utils.c
 
 int			get_len_longest_line(char	**map);
 char		*complete_line(char	*str, int size);
@@ -252,12 +252,12 @@ void		draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color);
 void		draw_seg(t_data *data, t_ray *ray);
 void		floor_ceiling(t_data *data);
 int			get_text_color(t_img *data, int x, int y);
+void		calculate_length(t_data *data, t_ray *ray);
 
 // hooks.c
 
 int			key_hook(int keycode, t_data *data);
 int			hook(void *mlx);
-void		free_and_exit(t_data *data);
 
 // raycasting.c
 

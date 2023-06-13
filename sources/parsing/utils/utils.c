@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:47:55 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/07 18:56:17 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 21:03:53 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,26 @@ static int	len_no_spaces(char *line)
 	return (len);
 }
 
+static int	count_line_map(char *line, int *mode)
+{
+	char	*new_line;
+
+	new_line = remove_spaces(line);
+	if (new_line[0] == '1' || new_line[0] == '0')
+	{
+		*mode = 1;
+		return (free(new_line), free(line), 1);
+	}
+	free(line);
+	free(new_line);
+	return (0);
+}
+
 int	get_map_size(char *map_name)
 {
 	int		fd;
 	int		map_size;
 	char	*line;
-	char	*new_line;
 	int		mode;
 
 	fd = open(map_name, O_RDONLY);
@@ -46,19 +60,10 @@ int	get_map_size(char *map_name)
 	{
 		if (is_empty_line(line) && mode == 1)
 			break ;
-		new_line = remove_spaces(line);
-		if (new_line[0] == '1' || new_line[0] == '0')
-		{
-			map_size++;
-			mode = 1;
-		}
-		free(line);
-		free(new_line);
+		map_size += count_line_map(line, &mode);
 		line = get_next_line(fd);
 	}
-	free(line);
-	close(fd);
-	return (map_size - 1);
+	return (free(line), close(fd), map_size - 1);
 }
 
 char	*remove_spaces(char *line)
@@ -103,14 +108,4 @@ char	*remove_nl(char *line)
 	}
 	result[j] = '\0';
 	return (result);
-}
-
-int	len_tab(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return (i);
 }
