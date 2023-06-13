@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/29 16:45:49 by jprofit           #+#    #+#             */
-/*   Updated: 2023/04/29 18:57:18 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 14:34:44 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -141,6 +141,5 @@ void	clean_stash(t_list	**stash)
 	clean_node->content[j] = 0;
 	free_stash(*stash);
 	*stash = clean_node;
-	free(clean_node->content);
-	free(clean_node);
+	return (free(clean_node->content), free(clean_node));
 }

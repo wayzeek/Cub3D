@@ -6,20 +6,11 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:34:37 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/13 11:34:40 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 15:12:04 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
-
-/*
- * line drawing algorithm
- * first calculates the distance between the two vectors
- * then determines the number of steps required to draw a line between them
- *
- * then calculates the increment values for the x and y
- * for each step based on the distance and number of steps.
- */
 
 void	draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color)
 {
@@ -47,67 +38,25 @@ void	draw_segment(t_data *data, t_vector vec1, t_vector vec2, int color)
 	}
 }
 
-/*static int	ft_calculate_height(t_ray *ray)
-{
-	if (ray->boolean)
-		ray->length = \
-			(ray->sidedist.x - ray->deltadist.x);
-	else
-		ray->length = \
-			(ray->sidedist.y - ray->deltadist.y);
-	return ((int)(WIN_HEIGHT / ray->length));
-}*/
-
 void	draw_seg(t_data *data, t_ray *ray)
 {
-	double	wall_x;
-	int		y;
-
-	int lineheight = (int)(WIN_HEIGHT / ray->length);
-	int drawstart = -lineheight / 2 + WIN_HEIGHT / 2;
-	if (drawstart < 0)
-		drawstart = 0;
-	int drawend = lineheight / 2 + WIN_HEIGHT / 2;
-	if (drawend >= WIN_HEIGHT)
-		drawend = WIN_HEIGHT - 1;
-
-	//Getting texture based on side hit
-	if (ray->side_hit == 0)
-		ray->texture = &data->parsing.texture_north;
-	else if (ray->side_hit == 1)
-		ray->texture = &data->parsing.texture_east;
-	else if (ray->side_hit == 2)
-		ray->texture = &data->parsing.texture_south;
-	else if (ray->side_hit == 3)
-		ray->texture = &data->parsing.texture_west;
-	if (ray->boolean)
-		wall_x = ray->start.y + ray->length * ray->dir.y;
-	else
-		wall_x = ray->start.x + ray->length * ray->dir.x;
-
-	// X coordinate on the texture
-	int tex_x = (int)(wall_x * (double)ray->texture->size.x);
+	ray->lineheight = (int)(WIN_HEIGHT / ray->length);
+	ray->drawstart = -ray->lineheight / 2 + WIN_HEIGHT / 2;
+	if (ray->drawstart < 0)
+		ray->drawstart = 0;
+	ray->drawend = ray->lineheight / 2 + WIN_HEIGHT / 2;
+	if (ray->drawend >= WIN_HEIGHT)
+		ray->drawend = WIN_HEIGHT - 1;
+	get_ray_texture(data, ray);
+	ray->tex_x = (int)(ray->wall_x * (double)ray->texture->size.x);
 	if (ray->side_hit <= 1 && ray->dir.x > 0)
-		tex_x = ray->texture->size.x - tex_x - 1;
+		ray->tex_x = ray->texture->size.x - ray->tex_x - 1;
 	else if (ray->side_hit >= 2 && ray->dir.y < 0)
-		tex_x = ray->texture->size.x - tex_x - 1;
-
-	// Calculate the step of the texture
-	double step = 1.0 * ray->texture->size.y / lineheight;
-
-	// Calculate the starting texture coordinate
-	double tex_pos = (drawstart - WIN_HEIGHT / 2 + lineheight / 2) * step;
-	
-	// Draw the pixels of the stripe as a vertical line
-	y = drawstart;
-	while (y < drawend)
-	{
-		int tex_y = (int)tex_pos & (ray->texture->size.y - 1);
-		tex_pos += step;
-		int color = get_text_color(ray->texture, tex_x, tex_y);
-		mlx_pixel_put_img(&data->img, ray->x, y, color);
-		y++;
-	}
+		ray->tex_x = ray->texture->size.x - ray->tex_x - 1;
+	ray->tex_step = 1.0 * ray->texture->size.y / ray->lineheight;
+	ray->tex_pos = (ray->drawstart - WIN_HEIGHT / 2 + \
+	ray->lineheight / 2) * ray->tex_step;
+	draw_stripe(data, ray);
 }
 
 void	floor_ceiling(t_data *data)

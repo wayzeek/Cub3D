@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 12:50:56 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/08 11:09:13 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 15:11:41 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,4 +58,37 @@ void	print_square(t_data *data, int x, int y, int size)
 		}
 		i++;
 	}
+}
+
+void	draw_stripe(t_data *data, t_ray *ray)
+{
+	int	y;
+	int	tex_y;
+	int	color;
+
+	y = ray->drawstart;
+	while (y < ray->drawend)
+	{
+		tex_y = (int)ray->tex_pos & (ray->texture->size.y - 1);
+		ray->tex_pos += ray->tex_step;
+		color = get_text_color(ray->texture, ray->tex_x, tex_y);
+		mlx_pixel_put_img(&data->img, ray->x, y, color);
+		y++;
+	}
+}
+
+void	get_ray_texture(t_data *data, t_ray *ray)
+{
+	if (ray->side_hit == 0)
+		ray->texture = &data->parsing.texture_north;
+	else if (ray->side_hit == 1)
+		ray->texture = &data->parsing.texture_east;
+	else if (ray->side_hit == 2)
+		ray->texture = &data->parsing.texture_south;
+	else if (ray->side_hit == 3)
+		ray->texture = &data->parsing.texture_west;
+	if (ray->boolean)
+		ray->wall_x = ray->start.y + ray->length * ray->dir.y;
+	else
+		ray->wall_x = ray->start.x + ray->length * ray->dir.x;
 }

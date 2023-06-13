@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/08 15:46:46 by jprofit          ###   ########.fr       */
+/*   Updated: 2023/06/13 14:56:01 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ static void	handle_move(t_data *data, int keycode)
 	}
 	else if (keycode == D)
 	{
-		data->player.pos.x -=(int)(data->player.dir.y * SPEED);
+		data->player.pos.x -= (int)(data->player.dir.y * SPEED);
 		data->player.pos.y += (int)(data->player.dir.x * SPEED);
 	}
 }

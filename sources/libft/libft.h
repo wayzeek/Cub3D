@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/08 17:04:39 by jprofit           #+#    #+#             */
-/*   Updated: 2023/04/29 19:36:21 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 14:57:27 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,7 +75,6 @@ t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *));
 
 int		ft_contains(char *str, char c);
 int		ft_strcmp(char *s1, char *s2);
-
 
 // PRINTF
 
