@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:34:37 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/13 15:12:04 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 20:01:24 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,6 +77,14 @@ void	floor_ceiling(t_data *data)
 		}
 		x++;
 	}
+}
+
+void	calculate_length(t_data *data, t_ray *ray)
+{
+	if (ray->last_incr == 'x')
+		ray->length = (ray->sidedist.x - ray->deltadist.x) / data->tile_size;
+	else
+		ray->length = (ray->sidedist.y - ray->deltadist.y) / data->tile_size;
 }
 
 int	get_text_color(t_img *data, int x, int y)

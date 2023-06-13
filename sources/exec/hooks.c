@@ -6,22 +6,12 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 13:02:44 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/13 14:56:01 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 19:59:40 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/cub3d.h"
 
-void	free_and_exit(t_data *data)
-{
-	mlx_destroy_image(data->mlx_ptr, data->img.img);
-	mlx_destroy_image(data->mlx_ptr, data->img_minimap.img);
-	mlx_destroy_window(data->mlx_ptr, data->win);
-	free_all(data);
-	exit(0);
-}
-
-// Exit cross
 int	hook(void *mlx)
 {
 	free_and_exit(mlx);

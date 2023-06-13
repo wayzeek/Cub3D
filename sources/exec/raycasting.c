@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/03 11:49:20 by jprofit           #+#    #+#             */
-/*   Updated: 2023/06/08 15:10:04 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 20:01:14 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ static void	dda(t_data *data, t_ray *ray)
 	t_point	cell;
 	int		hit;
 
-	hit = FALSE;
+	hit = 0;
 	while (!hit && ray->map.x <= WIN_WIDTH && ray->map.y <= WIN_HEIGHT)
 	{
 		if (ray->sidedist.x < ray->sidedist.y)
@@ -69,7 +69,7 @@ static void	dda(t_data *data, t_ray *ray)
 		cell = (t_point){ray->map.x / data->tile_size, \
 			ray->map.y / data->tile_size};
 		if (data->parsing.map[cell.y][cell.x] == '1')
-			hit = TRUE;
+			hit = 1;
 	}
 	ray->hit = (t_point){ray->map.x, ray->map.y};
 }
@@ -110,17 +110,6 @@ void	side_hit(t_ray *ray)
 		else
 			ray->side_hit = 2;
 	}
-}
-
-/*
- * calculates the length of the ray
- */
-static void	calculate_length(t_data *data, t_ray *ray)
-{
-	if (ray->last_incr == 'x')
-		ray->length = (ray->sidedist.x - ray->deltadist.x) / data->tile_size;
-	else
-		ray->length = (ray->sidedist.y - ray->deltadist.y) / data->tile_size;
 }
 
 void	raycasting(t_data *data)
