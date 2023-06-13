@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/30 13:34:37 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/13 20:01:24 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 21:13:46 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	calculate_length(t_data *data, t_ray *ray)
 		ray->length = (ray->sidedist.x - ray->deltadist.x) / data->tile_size;
 	else
 		ray->length = (ray->sidedist.y - ray->deltadist.y) / data->tile_size;
+	if (ray->length < 0.2)
+		ray->length = 0.25;
 }
 
 int	get_text_color(t_img *data, int x, int y)
