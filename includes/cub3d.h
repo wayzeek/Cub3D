@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/08 11:56:39 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/13 15:11:56 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@
 # define PI 3.14159265358979323846
 # define MAP_SIZE (WIN_WIDTH / 3)
 # define FOV (PI / 3)
-# define SPEED 2.5
+# define SPEED 3
 
 // Headers
 
@@ -134,6 +134,13 @@ typedef struct s_ray
 
 	t_img		*texture;
 	int			x;
+	int			lineheight;
+	int			drawstart;
+	int			drawend;
+	double		wall_x;
+	int			tex_x;
+	double		tex_step;
+	double		tex_pos;
 }	t_ray;
 
 // Player structure
@@ -236,7 +243,8 @@ void		print_img(t_data *data);
 void		mlx_pixel_put_img(t_img *img, int x, int y, int color);
 void		put_tile(t_data *data, int x, int y, int color);
 void		print_square(t_data *data, int x, int y, int size);
-void		draw_vert_ray(t_data *data, t_ray *ray);
+void		draw_stripe(t_data *data, t_ray *ray);
+void		get_ray_texture(t_data *data, t_ray *ray);
 
 // draw_utils.c
 
