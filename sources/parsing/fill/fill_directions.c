@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/06/01 11:02:49 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/13 21:05:36 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/14 18:23:47 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,12 +62,18 @@ static int	handle_north_south(t_data *data, char *line, int mode)
 		return (free(path), -1);
 	if (mode == 'N')
 	{
+		if (data->parsing.texture_north.img != NULL)
+			return (free(path), \
+			printf("Error\nNorth texture already filled !\n"), -1);
 		data->parsing.texture_north = ft_new_sprite(data->mlx_ptr, path);
 		if (check_texture(data->parsing.texture_north))
 			return (free(path), -1);
 	}
 	else if (mode == 'S')
 	{
+		if (data->parsing.texture_south.img != NULL)
+			return (free(path), \
+			printf("Error\nSouth texture already filled !\n"), -1);
 		data->parsing.texture_south = ft_new_sprite(data->mlx_ptr, path);
 		if (check_texture(data->parsing.texture_south))
 			return (free(path), -1);
@@ -85,12 +91,18 @@ static int	handle_east_west(t_data *data, char *line, int mode)
 		return (free(path), -1);
 	if (mode == 'E')
 	{
+		if (data->parsing.texture_east.img != NULL)
+			return (free(path), \
+			printf("Error\nEast texture already filled !\n"), -1);
 		data->parsing.texture_east = ft_new_sprite(data->mlx_ptr, path);
 		if (check_texture(data->parsing.texture_east))
 			return (free(path), -1);
 	}
 	else if (mode == 'W')
 	{
+		if (data->parsing.texture_west.img != NULL)
+			return (free(path), \
+			printf("Error\nWest texture already filled !\n"), -1);
 		data->parsing.texture_west = ft_new_sprite(data->mlx_ptr, path);
 		if (check_texture(data->parsing.texture_west))
 			return (free(path), -1);

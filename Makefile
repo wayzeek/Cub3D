@@ -6,7 +6,7 @@
 #    By: vcart <vcart@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 08:32:06 by vcart             #+#    #+#              #
-#    Updated: 2023/06/13 11:34:55 by vcart            ###   ########.fr        #
+#    Updated: 2023/06/14 18:27:03 by vcart            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -39,6 +39,7 @@ DIR_EXEC		=	${DIR_SRCS}exec/
 
 # Parsing files
 PARSING_FILES	=	${DIR_PARSING}parsing.c \
+					${DIR_PARSING}process.c \
 					${DIR_ERROR}check_error_colors.c \
 					${DIR_ERROR}check_map_error.c \
 					${DIR_FILL}fill_colors.c \
