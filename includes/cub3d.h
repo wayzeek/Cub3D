@@ -6,7 +6,7 @@
 /*   By: vcart <vcart@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/23 11:30:46 by vcart             #+#    #+#             */
-/*   Updated: 2023/06/13 20:36:40 by vcart            ###   ########.fr       */
+/*   Updated: 2023/06/14 18:29:05 by vcart            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -174,6 +174,10 @@ int			main(int argc, char **argv);
 // parsing.c
 
 int			get_parsing(t_data *data, char *map_name);
+
+// process.c
+
+int			process_line(t_data *data, char *line, int map_size, int map_fd);
 
 // check_error_colors.c
 
