@@ -6,7 +6,7 @@
 #    By: vcart <vcart@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/02 08:32:06 by vcart             #+#    #+#              #
-#    Updated: 2023/06/14 18:27:03 by vcart            ###   ########.fr        #
+#    Updated: 2023/06/15 11:21:23 by vcart            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -84,7 +84,7 @@ ${DIR_OBJS}%.o: %.c	${HEADERS}
 all :	 		${NAME}
 
 run:			${NAME}
-				./${NAME} ./map_test.cub
+				./${NAME} ./maps/islands.cub
 
 valgrind:		${NAME}
 				valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./${NAME} ./map_test.cub
