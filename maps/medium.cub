@@ -1,13 +1,13 @@
 F   192, 192 , 192
 
-SO     ./textures/SO.xpm
-WE      ./textures/WE.xpm
+SO     ./textures/blue.xpm
+WE      ./textures/red.xpm
 
 
 C   135, 206 ,250
 
-NO      ./textures/NO.xpm
-EA     ./textures/EA.xpm
+NO      ./textures/pink.xpm
+EA     ./textures/yellow.xpm
 
  11111111111111111   11111
  10000000000000001   10001
